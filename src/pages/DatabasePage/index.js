@@ -26,9 +26,8 @@ const DatabasePage = ({ dispatchUpdateTable, dispatchGetAllTables, table }) => {
         updatePayload();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [arteris, viaPaulista, setUpdateValues])
-
+   
     useEffect(() => {
-
         if (table.length >= 1) {
             setData(
                 table.filter((table) =>
@@ -40,7 +39,9 @@ const DatabasePage = ({ dispatchUpdateTable, dispatchGetAllTables, table }) => {
             );
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [search, optionsUF]);
+    }, [search, optionsUF, table]);
+
+    console.log(data)
 
     const updateRef = (id, item) => {
         setData(
@@ -179,7 +180,7 @@ const DatabasePage = ({ dispatchUpdateTable, dispatchGetAllTables, table }) => {
     return (
         <div className="database-page">
             <div>
-                <h2 className="database-title">Database</h2>
+                <h2 className="database-title">Database / DR</h2>
                 <div className="table_search-container">
                     <FiIcons.FiSearch className="table_input_search-icon" size={18} color="516078" />
                     <input className="table_input_search" type="text" placeholder="Buscar pelo código ou nome" onChange={e => { setSearch(e.target.value) }} />
@@ -191,13 +192,13 @@ const DatabasePage = ({ dispatchUpdateTable, dispatchGetAllTables, table }) => {
                 </div>
                 <div className="table_container">
                     <div className="table_header">
-                        <p className="table_col_code">CÓDIGO</p>
-                        <p className="table_col_name">NOME</p>
-                        <p className="table_col_unit">UNIDADE</p>
-                        <p className="table_col_price">PREÇO</p>
+                        <p className="table_col_code">Código</p>
+                        <p className="table_col_name">Nome</p>
+                        <p className="table_col_unit">Unidade</p>
+                        <p className="table_col_price">Preço</p>
                         <p className="table_col_state">UF</p>
-                        <p className="table_col_ref">ARTERIS</p>
-                        <p className="table_col_ref">VIA PAULISTA</p>
+                        <p className="table_col_ref">Arteris</p>
+                        <p className="table_col_ref">Via Paulista</p>
                         <p className="table_col_actions"></p>
                     </div>
                     {data.length >= 1 && (

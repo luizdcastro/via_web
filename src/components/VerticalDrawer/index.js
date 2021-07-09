@@ -23,7 +23,7 @@ const VerticalDrawer = () => {
                 <li>
                     <Link className="vertical-menu-item" to="/importar">
                         <FiIcons.FiUploadCloud size={22}  />
-                        <p className="vertical-menu-title">Importar</p>
+                        <p className="vertical-menu-title">Atualizar</p>
                     </Link>
                 </li>
                 <li>

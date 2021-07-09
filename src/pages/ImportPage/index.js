@@ -60,6 +60,7 @@ const ImportPage = ({ dispatchCreateTable, dispatchGetAllTables }) => {
                 updateFile(item.id, {
                     id: response.data.id,
                 });
+                dispatchGetAllTables()
             },
             (error) => console.log(error)
         )
@@ -77,11 +78,13 @@ const ImportPage = ({ dispatchCreateTable, dispatchGetAllTables }) => {
 
     return (
         <div className="import-page">
-            <h2 className="homepage-title">Importar</h2>
+            <h2 className="homepage-title">Atualizar</h2>
+            
             <div className="upload-container">
                 <UploadFile onUpload={handleUpload} />
                 {uploadedFiles.length > 0 ? <FileList files={uploadedFiles} /> : null}
             </div>
+            
         </div>
     )
 }
