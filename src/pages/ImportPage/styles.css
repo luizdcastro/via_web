@@ -1,0 +1,20 @@
+.import-page{
+    display: flex;
+    margin-left: 250px;
+    padding-top: 30px;  
+    padding-left: 30px;
+}
+
+.homepage-title{    
+    font-weight: 400;
+    font-size: 1.5em;
+    color: rgba(0,0,0,.85)
+}
+
+.upload-container {
+    width: 100%;
+    max-width: 400px;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 20px;
+}

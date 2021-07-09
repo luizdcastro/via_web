@@ -1,0 +1,12 @@
+.logs-page{   
+    display: flex;
+    margin-left: 250px;
+    padding-top: 30px;  
+    padding-left: 30px;
+}
+
+.logs-title{    
+    font-weight: 400;
+    font-size: 1.5em;
+    color: rgba(0,0,0,.85)
+}
