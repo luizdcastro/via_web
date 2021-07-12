@@ -3,11 +3,10 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import VerticalDrawer from '../components/VerticalDrawer'
-import DashboardPage from '../pages/DashboardPage'
+import BudgetPage from '../pages/BudgetPage'
 import DatabasePage from "../pages/DatabasePage";
 import ImportPage from '../pages/ImportPage'
 import LogsPage from '../pages/LogsPage'
-import TablePreview from '../pages/TablePreview'
 
 const App = ({ user }) => {
 
@@ -16,11 +15,10 @@ const App = ({ user }) => {
       <VerticalDrawer />
       <div className="App">
         <Switch>
-          <Route exact path="/dashboard" component={DashboardPage} />
+          <Route exact path="/orçamento" component={BudgetPage} />
           <Route exact path="/database" component={DatabasePage} />
           <Route exact path="/importar" component={ImportPage} />
            <Route exact path="/registros" component={LogsPage} />
-          <Route exact path="/preview/:tableId" component={TablePreview} />
           <Redirect to="/dashboard" />
         </Switch>
       </div>

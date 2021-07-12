@@ -1,7 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { CircularProgressbar } from 'react-circular-progressbar'
-import { MdCheckCircle, MdError, MdLink } from 'react-icons/md'
+import { MdCheckCircle, MdError } from 'react-icons/md'
+import Ellipsis from '@bit/joshk.react-spinners-css.ellipsis';
+
 
 import { Container, FileInfo, Preview } from './styles'
 import ExcelIcon from '../../assets/icons/excel.png'
@@ -15,33 +15,18 @@ const FileList = ({ files }) => {
                     <FileInfo>
                         <Preview src={ExcelIcon} />
                         <div>
-                            <strong>{uploadedFile.name}</strong>
-                            <span>
-                                {uploadedFile.readbleSize}
-                                {!!uploadedFile.id && (
-                                    <button onClick={() => { }}>Excluir</button>
-                                )}
+                            <strong style={{fontSize: 12}}>{uploadedFile.name}</strong>
+                            <span >
+                                {uploadedFile.readbleSize}                               
                             </span>
                         </div>
                     </FileInfo>
                     <div>
                         {!uploadedFile.uploaded && !uploadedFile.error && (
-                            <CircularProgressbar
-                                styles={{
-                                    root: { width: 24 },
-                                    path: { stroke: '#7159c1' }
-                                }}
-                                strokeWidth={10}
-                                percentage={uploadedFile.progress}
-                            />
-                        )}
-                        {uploadedFile.uploaded && (
-                            <Link to={`/preview/${uploadedFile.id}`} target="_blank">
-                                <MdLink style={{ marginRight: 8 }} size={24} color="#222" />
-                            </Link>
-                        )}
-                        {uploadedFile.uploaded && <MdCheckCircle size={24} color="#78e5d5" />}
-                        {uploadedFile.error && (<MdError size={24} color="#e57878" />)}
+                           <Ellipsis color="#be97e8" size={45} /> 
+                        )}                      
+                        {uploadedFile.uploaded && <MdCheckCircle size={22} color="#78e5d5" />}
+                        {uploadedFile.error && (<MdError size={22} color="#e57878" />)}
                     </div>
                 </li>
             ))}

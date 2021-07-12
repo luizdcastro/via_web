@@ -8,6 +8,8 @@ export const Container = styled.ul`
         justify-content: space-between;
         align-items: center;
         color: #444;
+        border-bottom: 1px solid rgb(224,224,224);
+
 
         & + li {
             margin-top: 15px;
@@ -17,7 +19,7 @@ export const Container = styled.ul`
 
 export const FileInfo = styled.div`
     display: flex;
-    align-items: center;
+    align-items: center;   
 
     div {
         display: flex;
@@ -40,8 +42,8 @@ export const FileInfo = styled.div`
 `;
 
 export const Preview = styled.div`
-    width: 36px;
-    height: 36px;
+    width: 30px;
+    height: 30px;
     background-image: url(${props => props.src});
     background-repeat: no-repeat;
     background-size: cover;

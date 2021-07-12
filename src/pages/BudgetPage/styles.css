@@ -1,11 +1,11 @@
-.import-page{
+.budget-page{
     display: flex;
     margin-left: 220px;
     padding-top: 30px;  
     padding-left: 30px;
 }
 
-.homepage-title{    
+.budget-title{    
     font-weight: 400;
     font-size: 1.5em;
     color: rgba(0,0,0,.85);
@@ -20,20 +20,33 @@
     border: 1px solid rgb(224,224,224);    
 }
 
-.import-db-select-label{
+.budget-db-select-label{
     font-size: 14px;
     margin-bottom: 8px;
 }
 
-.import-db-select{
+.budget-db-select{
     width: 120px;
     height: 35px;
     border: solid 1px rgb(211,211,211);
     font-size: 12px;
     color: #516078;
     margin-bottom: 8px;
+    margin-right: 10px;
 }
 
-.import-db-select:focus{
+.budget-db-select:focus{
+    outline: none
+}
+
+.budget-uf-select{
+    height: 35px;
+    width: 60px;
+    border: solid 1px rgb(211,211,211);
+    font-size: 12px;
+    color: #516078;    
+}
+
+.budget-uf-select:focus{
     outline: none
 }

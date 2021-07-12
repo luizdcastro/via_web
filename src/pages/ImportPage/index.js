@@ -1,5 +1,5 @@
 
-import React, { useState} from 'react'
+import React, { useState } from 'react'
 import { connect } from "react-redux";
 import UploadFile from '../../components/UploadFile'
 import FileList from '../../components/FileList'
@@ -78,17 +78,21 @@ const ImportPage = ({ dispatchCreateTable, dispatchGetAllTables }) => {
 
     return (
         <div className="import-page">
-            <h2 className="homepage-title">Atualizar</h2>
-            
-            <div className="upload-container">
-                <UploadFile onUpload={handleUpload} />
-                {uploadedFiles.length > 0 ? <FileList files={uploadedFiles} /> : null}
+            <div>
+                <h2 className="homepage-title">Atualizar</h2>
+                <p className="import-db-select-label">Selecionar DB</p>
+                <select className="import-db-select" value="">
+                    <option key="dr" value="dr">DR</option>
+                </select>
+                <p className="import-db-select-label">Importar Tabelas</p>
+                <div className="upload-container">
+                    <UploadFile onUpload={handleUpload} />
+                    {uploadedFiles.length > 0 ? <FileList files={uploadedFiles} /> : null}
+                </div>
             </div>
-            
         </div>
     )
 }
-
 
 const mapDispatchToProps = (dispatch) => ({
     dispatchGetAllTables: () => dispatch(getAllTables()),
