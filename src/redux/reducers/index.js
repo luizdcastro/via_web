@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux';
 
 import user from './user/UserReducer';
-import table from './table/TableReducer';
+import der from './der/DerReducer';
+import sicro from './sicro/SicroReducer';
 import budget from './budget/BudgetReducer'
 
 const rootReducer = combineReducers({
     user,
-    table,
+    der,
+    sicro,
     budget,
 });
 

@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 
 import VerticalDrawer from '../components/VerticalDrawer'
 import BudgetPage from '../pages/BudgetPage'
-import DatabasePage from "../pages/DatabasePage";
+import DerPage from "../pages/DerPage";
+import SicroPage from '../pages/SicroPage'
 import ImportPage from '../pages/ImportPage'
 import LogsPage from '../pages/LogsPage'
 
@@ -16,7 +17,8 @@ const App = ({ user }) => {
       <div className="App">
         <Switch>
           <Route exact path="/orçamento" component={BudgetPage} />
-          <Route exact path="/database" component={DatabasePage} />
+          <Route exact path="/database-der" component={DerPage} />
+          <Route exact path="/database-sicro" component={SicroPage} />
           <Route exact path="/importar" component={ImportPage} />
            <Route exact path="/registros" component={LogsPage} />
           <Redirect to="/dashboard" />

@@ -3,11 +3,11 @@ import { connect } from "react-redux";
 import { List } from "react-virtualized";
 import * as FiIcons from 'react-icons/fi'
 
-import { getAllTables, updateTable } from '../../redux/actions/TableActions'
+import { getAllDers, updateDer } from '../../redux/actions/DerActions'
 
 import "./styles.css"
 
-const DatabasePage = ({ dispatchUpdateTable, dispatchGetAllTables, table }) => {
+const DerPage = ({ dispatchUpdateDer, dispatchGetAllDers, der }) => {
     const [data, setData] = useState([])
     const [search, setSearch] = useState("")
     const [editRow, setEditRow] = useState([])
@@ -17,8 +17,8 @@ const DatabasePage = ({ dispatchUpdateTable, dispatchGetAllTables, table }) => {
     const [updateValues, setUpdateValues] = useState({})
 
     useEffect(() => {
-        dispatchGetAllTables();
-        setData(table)
+        dispatchGetAllDers();
+        setData(der)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -28,20 +28,18 @@ const DatabasePage = ({ dispatchUpdateTable, dispatchGetAllTables, table }) => {
     }, [arteris, viaPaulista, setUpdateValues])
    
     useEffect(() => {
-        if (table.length >= 1) {
+        if (der.length >= 1) {
             setData(
-                table.filter((table) =>
-                    (table.state?.toLowerCase().includes(optionsUF)) &&
-                    (table.name?.toLowerCase().includes(search.toLocaleLowerCase()) ||
-                        table.code?.toLowerCase().includes(search.toLocaleLowerCase())
+                der.filter((der) =>
+                    (der.state?.toLowerCase().includes(optionsUF)) &&
+                    (der.name?.toLowerCase().includes(search.toLocaleLowerCase()) ||
+                        der.code?.toLowerCase().includes(search.toLocaleLowerCase())
                     )
                 )
             );
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [search, optionsUF, table]);
-
-    console.log(data)
+    }, [search, optionsUF, der]);
 
     const updateRef = (id, item) => {
         setData(
@@ -89,7 +87,7 @@ const DatabasePage = ({ dispatchUpdateTable, dispatchGetAllTables, table }) => {
     }
 
     const handleUpdate = () => {
-        dispatchUpdateTable(
+        dispatchUpdateDer(
             arteris.arteris,
             viaPaulista.via_paulista,
             editRow,
@@ -97,7 +95,7 @@ const DatabasePage = ({ dispatchUpdateTable, dispatchGetAllTables, table }) => {
                 updateRef(updateValues?.id, updateValues?.data);
                 setArteris([])
                 setViaPaulista([])
-                dispatchGetAllTables()
+                dispatchGetAllDers()
             },
             (error) => console.log(error)
         )
@@ -126,19 +124,19 @@ const DatabasePage = ({ dispatchUpdateTable, dispatchGetAllTables, table }) => {
     const Row = ({ index, style }) => {
         const item = data[index]
         return (
-            <div style={{ ...style }} className="table_body" key={item.id}>
-                <p className="table_row_code">{item?.code}</p>
-                <p className="table_row_name">{item?.name.toLowerCase()}</p>
-                <p className="table_row_unit">{item?.unit.toUpperCase()}</p>
-                <p className="table_row_price">{item?.price}</p>
-                <p className="table_row_state">{item?.state}</p>
+            <div style={{ ...style }} className="der_body" key={item.id}>
+                <p className="der_row_code">{item?.code}</p>
+                <p className="der_row_name">{item?.name.toLowerCase()}</p>
+                <p className="der_row_unit">{item?.unit.toUpperCase()}</p>
+                <p className="der_row_price">{item?.price}</p>
+                <p className="der_row_state">{item?.state}</p>
                 {
                     !editRow.includes(item.id) ?
-                        <p className="table_row_ref">{item?.arteris}</p>
+                        <p className="der_row_ref">{item?.arteris}</p>
                         :
-                        <div className="table_row_input-container" >
+                        <div className="der_row_input-container" >
                             <input
-                                className="table_row_input"
+                                className="der_row_input"
                                 type="text"
                                 defaultValue={item?.arteris}
                                 onChange={(e) => setArteris({ id: item.id, arteris: e.target.value })}
@@ -147,26 +145,26 @@ const DatabasePage = ({ dispatchUpdateTable, dispatchGetAllTables, table }) => {
                 }
                 {
                     !editRow.includes(item.id) ?
-                        <p className="table_row_ref">{item?.via_paulista}</p>
+                        <p className="der_row_ref">{item?.via_paulista}</p>
 
                         :
-                        <div className="table_row_input-container" >
+                        <div className="der_row_input-container" >
                             <input
-                                className="table_row_input"
+                                className="der_row_input"
                                 type="text"
                                 defaultValue={item?.via_paulista}
                                 onChange={(e) => setViaPaulista({ id: item.id, via_paulista: e.target.value })}
                             />
                         </div>
                 }
-                <div className="table_row_actions">
+                <div className="der_row_actions">
                     {!editRow.includes(item.id) ?
-                        <button className="table_button" onClick={() => setEditRow(item.id)}>
+                        <button className="der_button" onClick={() => setEditRow(item.id)}>
                             <FiIcons.FiEdit size={18} />
                         </button>
                         :
-                        <button className="table_button">
-                            <FiIcons.FiCheck size={20} color="105efb" onClick={() => {
+                        <button className="der_button">
+                            <FiIcons.FiCheck size={20} color="#105efb" onClick={() => {
                                 handleUpdate();
                                 setEditRow("")
                             }} />
@@ -178,33 +176,33 @@ const DatabasePage = ({ dispatchUpdateTable, dispatchGetAllTables, table }) => {
     };
 
     return (
-        <div className="database-page">
+        <div className="der-page">
             <div>
-                <h2 className="database-title">Database / DR</h2>
-                <div className="table_search-container">
-                    <FiIcons.FiSearch className="table_input_search-icon" size={18} color="516078" />
-                    <input className="table_input_search" type="text" placeholder="Buscar pelo código ou nome" onChange={e => { setSearch(e.target.value) }} />
-                    <select className="table_input_search-select" placeholder="UF" value={optionsUF} onChange={e => setOptionsUF(e.target.value)}>
+                <h2 className="der-title">Database / DER</h2>
+                <div className="der_search-container">
+                    <FiIcons.FiSearch className="der_input_search-icon" size={18} color="516078" />
+                    <input className="der_input_search" type="text" placeholder="Buscar pelo código ou nome" onChange={e => { setSearch(e.target.value) }} />
+                    <select className="der_input_search-select" placeholder="UF" value={optionsUF} onChange={e => setOptionsUF(e.target.value)}>
                         {ufOptions.map((option) => (
                             <option key={option.value} value={option.value}>{option.label}</option>
                         ))}
                     </select>
                 </div>
-                <div className="table_container">
-                    <div className="table_header">
-                        <p className="table_col_code">Código</p>
-                        <p className="table_col_name">Nome</p>
-                        <p className="table_col_unit">Unidade</p>
-                        <p className="table_col_price">Preço</p>
-                        <p className="table_col_state">UF</p>
-                        <p className="table_col_ref">Arteris</p>
-                        <p className="table_col_ref">Via Paulista</p>
-                        <p className="table_col_actions"></p>
+                <div className="der_container">
+                    <div className="der_header">
+                        <p className="der_col_code">Código</p>
+                        <p className="der_col_name">Nome</p>
+                        <p className="der_col_unit">Unidade</p>
+                        <p className="der_col_price">Preço</p>
+                        <p className="der_col_state">UF</p>
+                        <p className="der_col_ref">Arteris</p>
+                        <p className="der_col_ref">Via Paulista</p>
+                        <p className="der_col_actions">Editar</p>
                     </div>
                     {data.length >= 1 && (
                         <div style={{ height: '60vh', flex: 1 }}>
                             <List
-                                width={1100}
+                                width={1200}
                                 height={450}
                                 rowHeight={35}
                                 rowRenderer={Row}
@@ -218,13 +216,13 @@ const DatabasePage = ({ dispatchUpdateTable, dispatchGetAllTables, table }) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    dispatchGetAllTables: () => dispatch(getAllTables()),
-    dispatchUpdateTable: (arteris, via_paulista, tableId, onSuccess, onError) =>
-        dispatch(updateTable({ arteris, via_paulista }, tableId, onSuccess, onError))
+    dispatchGetAllDers: () => dispatch(getAllDers()),
+    dispatchUpdateDer: (arteris, via_paulista, derId, onSuccess, onError) =>
+        dispatch(updateDer({ arteris, via_paulista }, derId, onSuccess, onError))
 });
 
 const mapStateToProps = (state) => ({
-    table: state.table,
+    der: state.der,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(DatabasePage);
+export default connect(mapStateToProps, mapDispatchToProps)(DerPage);

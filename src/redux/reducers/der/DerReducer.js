@@ -1,16 +1,16 @@
 import * as constants from '../../constants';
 
-export default function tableReducer(state = [], action) {
+export default function derReducer(state = [], action) {
     switch (action.type) {
-        case constants.CREATE_TABLE:
+        case constants.CREATE_DER:
             return { ...action.payload };
-        case constants.GET_TABLE:
+        case constants.GET_DER:
             return { ...action.payload };
-        case constants.GET_ALL_TABLES:
+        case constants.GET_ALL_DERS:
             return [...action.payload];
-        case constants.UPDATE_TABLE:
+        case constants.UPDATE_DER:
             return { ...action.payload };
-        case constants.DELETE_TABLE:
+        case constants.DELETE_DER:
             return { ...action.payload };
         default:
             return state;

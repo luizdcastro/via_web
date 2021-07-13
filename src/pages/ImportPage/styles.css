@@ -1,5 +1,7 @@
 .import-page{
     display: flex;
+    height: 100vh;
+    background-color: #fafafa;
     margin-left: 220px;
     padding-top: 30px;  
     padding-left: 30px;
@@ -21,8 +23,8 @@
 }
 
 .import-db-select-label{
-    font-size: 14px;
-    margin-bottom: 8px;
+    font-size: 15px;
+    color: #516078;
 }
 
 .import-db-select{
@@ -36,4 +38,20 @@
 
 .import-db-select:focus{
     outline: none
+}
+
+#budget-create-button-disabled{
+    width: 300px;
+    height: 40px;
+    margin-top: 15px;
+    font-size: 13px;
+    font-weight: 500;
+    border: solid 1px #D0D0D0;
+    background-color: #D0D0D0;
+    color: #fafafa;
+}
+
+#budget-create-button-disabled:hover{
+    cursor: default;
+    filter: none    
 }

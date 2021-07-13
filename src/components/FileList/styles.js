@@ -1,14 +1,15 @@
 import styled from "styled-components";
 
 export const Container = styled.ul`
-    margin-top: 20px;
+    margin-top: 10px;
 
     li {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin-right: 5px;
+        margin-left: 5px;
         color: #444;
-        border-bottom: 1px solid rgb(224,224,224);
 
 
         & + li {
@@ -26,15 +27,13 @@ export const FileInfo = styled.div`
         flex-direction: column;
 
         span {
-            font-size: 12px;
+            font-size: 10px;
             color: #999;
-            margin-top: 5px;
 
             button {
                 border: 0;
                 background: transparent;
                 color: #e57878;      
-                margin-left: 5px;
                 cursor: pointer;
             }
         }
@@ -42,8 +41,8 @@ export const FileInfo = styled.div`
 `;
 
 export const Preview = styled.div`
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     background-image: url(${props => props.src});
     background-repeat: no-repeat;
     background-size: cover;

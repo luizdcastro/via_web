@@ -1,5 +1,7 @@
 .budget-page{
     display: flex;
+    background-color: #fafafa;
+    height: 100vh;
     margin-left: 220px;
     padding-top: 30px;  
     padding-left: 30px;
@@ -12,20 +14,26 @@
     margin-bottom: 20px;
 }
 
-.upload-container {
-    width: 350px;
-    margin-top: 8px;
+.budget-upload-container {
+    max-width: 300px;
+    margin-top: 15px;
     border-radius: 4px;  
-    padding: 12px;
-    border: 1px solid rgb(224,224,224);    
+    padding: 5px;
+    border: 1px solid rgb(200,200,200)  
+}
+
+.budget-input-data{
+    display: block;   
+    width: 400px; 
 }
 
 .budget-db-select-label{
-    font-size: 14px;
-    margin-bottom: 8px;
+    font-size: 15px;
+    color: #516078;
+
 }
 
-.budget-db-select{
+.budget-select{
     width: 120px;
     height: 35px;
     border: solid 1px rgb(211,211,211);
@@ -39,14 +47,26 @@
     outline: none
 }
 
-.budget-uf-select{
+.budget-input{
+    width: 120px;
     height: 35px;
-    width: 60px;
     border: solid 1px rgb(211,211,211);
     font-size: 12px;
-    color: #516078;    
+    color: #516078;
+    margin-bottom: 8px;
+    padding-left: 4px;
 }
 
-.budget-uf-select:focus{
+.budget-input:focus{
     outline: none
+}
+
+#budget-create-button{
+    width: 300px;
+    height: 40px;
+    margin-top: 15px;
+    font-size: 13px;
+    font-weight: 500;
+    background-color: #516078;
+    border: solid 1px #516078;
 }

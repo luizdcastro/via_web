@@ -1,19 +1,21 @@
-.database-page{   
+.der-page{   
     display: flex;
     margin-left: 220px;
+    height: 100vh;
+    background-color: #fafafa;
     padding-top: 30px;  
     padding-left: 30px;
     padding-right: 30px;
 
 }
 
-.database-title{    
+.der-title{    
     font-weight: 400;
     font-size: 1.5em;
     color: rgba(0,0,0,.85)
 }
 
-.table_header{
+.der_header{
     display: flex;
     height: 35px;
     align-items: center;
@@ -21,94 +23,95 @@
     border-bottom: 1px solid rgb(224,224,224);
     font-size: 12px;
     font-weight: 700;
-    color: rgba(0,0,0,.75) ;
+    color: rgba(0,0,0,.75);
+
 }
 
-.table_col_code{
+.der_col_code{
     width: 100px;
     text-align: left;
     padding-left: 5px;
 }
 
-.table_col_name{
-    width: 470px;
+.der_col_name{
+    width: 500px;
     text-align: left; 
 }
 
-.table_col_unit{
+.der_col_unit{
     width: 80px;
     text-align: left; 
 }
 
-.table_col_price{
+.der_col_price{
     width: 60px;
     text-align: left; 
 }
 
-.table_col_state {
+.der_col_state {
     width: 60px;
     text-align: left; 
 }
 
-.table_col_ref {
-    width: 100px;
+.der_col_ref {
+    width: 120px;
     text-align: left; 
 }
 
-.table_col_actions {
-    width: 100px;
-    text-align: left; 
+.der_col_actions {
+    width: 120px;
+    text-align: right; 
 }
 
-.table_body{
+.der_body{
     display: flex;
     align-items: center;
     border-bottom: 1px solid rgb(224,224,224);
     font-size: 12px;
 }
 
-.table_body:hover{    
+.der_body:hover{    
     background-color: rgb(240,240,240);
 }
 
-.table_row_code{
+.der_row_code{
     width: 100px;
     text-align: left;
     padding-left: 5px;
 }
 
-.table_row_name{
-    width: 470px;
+.der_row_name{
+    width: 500px;
     text-align: left;  
 }
 
-.table_row_unit{
+.der_row_unit{
     width: 80px;
     text-align: left; 
 }
 
-.table_row_price{
+.der_row_price{
     width: 60px;
     text-align: left;   
 }
 
-.table_row_state{
+.der_row_state{
     width: 60px;
     text-align: left;   
 }
 
-.table_row_ref {
-    width: 100px;
+.der_row_ref {
+    width: 120px;
     text-align: left; 
 }
 
-.table_row_input-container{
-    width: 100px;
+.der_row_input-container{
+    width: 120px;
     display: flex;
     justify-content: left;
 }
 
-.table_row_input {
+.der_row_input {
     width: 80px;
     height: 24px;
     font-size: 11px;
@@ -119,18 +122,18 @@
     
 }
 
-.table_row_input:focus{
+.der_row_input:focus{
     outline: none;
     border: solid 1px #105efb
 }
 
-.table_row_actions {
-    width: 100px;
+.der_row_actions {
+    width: 120px;
     display: flex;   
     justify-content: flex-end;  
 }
 
-.table_button{
+.der_button{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -140,12 +143,12 @@
     color: #516078    
 }
 
-.table_button:hover{
+.der_button:hover{
     color: #105efb;
     cursor: pointer;
 }
 
-.table_search-container{
+.der_search-container{
     position: relative;
     display: flex;
     width: 600px;
@@ -153,7 +156,7 @@
     margin-top: 30px;
 }
 
-.table_input_search{
+.der_input_search{
     height: 35px;
     width: 300px;
     border: solid 1px rgb(211,211,211);
@@ -162,27 +165,31 @@
     padding-left: 30px;
     font-size: 12px;
     color: #516078;
+    background-color: #fafafa;
+
 }
 
-.table_input_search:focus{
+.der_input_search:focus{
     outline: none
 }
 
-.table_input_search-icon{
+.der_input_search-icon{
     position: absolute;
     left: 1%;
     opacity: 0.5;
     z-index: 1;   
 }
 
-.table_input_search-select{
+.der_input_search-select{
     height: 35px;
     border: solid 1px rgb(211,211,211);
     font-size: 12px;
     color: #516078;
+    background-color: #fafafa;
+
 }
 
-.table_input_search-select:focus{
+.der_input_search-select:focus{
     outline: none
 }
 

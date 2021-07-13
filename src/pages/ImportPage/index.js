@@ -1,18 +1,23 @@
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from "react-redux";
 import UploadFile from '../../components/UploadFile'
 import FileList from '../../components/FileList'
+import TextField from '@material-ui/core/TextField';
+import CustomButton from '../../components/CustomButton'
 import { uniqueId } from 'lodash'
 import fileSize from 'filesize'
 import * as XLSX from 'xlsx'
 
-import { createTable, getAllTables } from '../../redux/actions/TableActions'
+import { createDer, getAllDers } from '../../redux/actions/DerActions'
+import { createSicro, getAllSicros } from '../../redux/actions/SicroActions'
 
 import './styles.css'
 
-const ImportPage = ({ dispatchCreateTable, dispatchGetAllTables }) => {
+const ImportPage = ({ dispatchCreateDer, dispatchCreateSicro, dispatchGetAllDers, dispatchGetAllSicros }) => {
     const [uploadedFiles, setUploadedFiles] = useState([]);
+    const [optionsUF, setOptionsUF] = useState("")
+    const [database, setDatabase] = useState("")
 
     const handleUpload = (files) => {
         const fileUpload = files.map(file => ({
@@ -25,8 +30,7 @@ const ImportPage = ({ dispatchCreateTable, dispatchGetAllTables }) => {
             error: false,
             table: []
         }))
-
-        setUploadedFiles((uploadedFiles.concat(fileUpload)))
+        setUploadedFiles(fileUpload)
     }
 
     for (const item of uploadedFiles) {
@@ -43,27 +47,33 @@ const ImportPage = ({ dispatchCreateTable, dispatchGetAllTables }) => {
             item.table = result
 
             if (!item.uploaded && item.table.length >= 1) {
-                handleSubmmit(item)
-                item.uploaded = true
+                updateFile(item.id, {
+                    uploaded: true
+                })
             }
         }
     };
 
     const handleSubmmit = (item) => {
-        dispatchCreateTable(
-            item.table,
-            (event) => {
-                const progress = parseInt(Math.round((event.loaded * 100) / event.total));
-                item.progress = progress
-            },
-            (response) => {
-                updateFile(item.id, {
-                    id: response.data.id,
-                });
-                dispatchGetAllTables()
-            },
-            (error) => console.log(error)
-        )
+        if (database == 'der') {
+            dispatchCreateDer(
+                { table: item.der, state: optionsUF },
+                (response) => {
+                    dispatchGetAllDers()
+                },
+                (error) => console.log(error)
+            )
+        }
+
+        if (database == 'sicro') {
+            dispatchCreateSicro(
+                { table: item.sicro, state: optionsUF },
+                (response) => {
+                    dispatchGetAllSicros()
+                },
+                (error) => console.log(error)
+            )
+        }
     }
 
     const updateFile = (id, data) => {
@@ -76,18 +86,73 @@ const ImportPage = ({ dispatchCreateTable, dispatchGetAllTables }) => {
         );
     };
 
+    const ufOptions = [
+        {
+            label: "PR",
+            value: "pr"
+        },
+        {
+            label: "SP",
+            value: "sp"
+        },
+        {
+            label: "RS",
+            value: "rs"
+        },
+    ]
+
     return (
         <div className="import-page">
             <div>
                 <h2 className="homepage-title">Atualizar</h2>
-                <p className="import-db-select-label">Selecionar DB</p>
-                <select className="import-db-select" value="">
-                    <option key="dr" value="dr">DR</option>
-                </select>
-                <p className="import-db-select-label">Importar Tabelas</p>
-                <div className="upload-container">
-                    <UploadFile onUpload={handleUpload} />
-                    {uploadedFiles.length > 0 ? <FileList files={uploadedFiles} /> : null}
+                <p className="import-db-select-label">Dados para atualização do DB</p>
+                <div className="budget-input-data">
+                    <TextField
+                        label="Database"
+                        select
+                        size="small"
+                        variant="outlined"
+                        inputProps={{ style: { fontSize: 13 } }}
+                        InputLabelProps={{ style: { fontSize: 13, } }}
+                        SelectProps={{
+                            native: true,
+                        }}
+                        style={{ width: 300, marginTop: 15 }}
+                        onChange={(e) => setDatabase(e.target.value)}
+                    >
+                        <option value="" defaultValue hidden></option>
+                        <option className="option-select-item" value="der">DER</option>
+                        <option className="option-select-item" value="sicro">Sicro</option>
+                    </TextField>
+                    <TextField
+                        label="UF"
+                        select
+                        size="small"
+                        variant="outlined"
+                        inputProps={{ style: { fontSize: 13 } }}
+                        InputLabelProps={{ style: { fontSize: 13 } }}
+                        SelectProps={{
+                            native: true,
+                        }}
+                        style={{ width: 300, marginTop: 15 }}
+                        onChange={e => setOptionsUF(e.target.value)}
+                    >
+                        <option value="" defaultValue hidden></option>
+                        {ufOptions.map((option) => (
+                            <option key={option.value} value={option.value}>{option.label}</option>
+                        ))}
+                    </TextField>
+                    <div className="budget-upload-container">
+                        <UploadFile onUpload={handleUpload} />
+                        {uploadedFiles.length > 0 ? <FileList files={uploadedFiles} /> : null}
+                    </div>
+                    {
+                        !!database & !!optionsUF & uploadedFiles.length >= 1 ?
+                        <CustomButton name="Importar Dados" id="budget-create-button" onChange={() => { }} />
+                        :
+                        <CustomButton name="Importar Dados" id="budget-create-button-disabled" disabled/>
+                    }
+                    
                 </div>
             </div>
         </div>
@@ -95,13 +160,16 @@ const ImportPage = ({ dispatchCreateTable, dispatchGetAllTables }) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    dispatchGetAllTables: () => dispatch(getAllTables()),
-    dispatchCreateTable: (table, onUploadProgress, onSuccess, onError) =>
-        dispatch(createTable({ table }, onUploadProgress, onSuccess, onError))
+    dispatchGetAllDers: () => dispatch(getAllDers()),
+    dispatchCreateDer: (der, onSuccess, onError) =>
+        dispatch(createDer({ der }, onSuccess, onError)),
+    dispatchGetAllSicros: () => dispatch(getAllSicros()),
+    dispatchCreateSicro: (sicro, onSuccess, onError) =>
+        dispatch(createSicro({ sicro }, onSuccess, onError))
 });
 
 const mapStateToProps = (state) => ({
-    table: state.table,
+    der: state.der,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ImportPage);

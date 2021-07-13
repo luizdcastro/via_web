@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { connect } from "react-redux";
 import UploadFile from '../../components/UploadFile'
 import FileList from '../../components/FileList'
@@ -7,17 +7,53 @@ import { uniqueId } from 'lodash'
 import fileSize from 'filesize'
 import * as XLSX from 'xlsx'
 import { saveAs } from 'file-saver';
-
+import TextField from '@material-ui/core/TextField';
+import NumberFormat from 'react-number-format';
+import PropTypes from 'prop-types';
+import CustomButton from '../../components/CustomButton'
 
 import { createBudget, getAllBudgets } from '../../redux/actions/BudgetActions'
 
 import './styles.css'
 
-const ImportPage = ({ dispatchCreateBudget, dispatchGetAllBudgets }) => {
+function NumberFormatCustom(props) {
+    const { inputRef, onChange, ...other } = props;
+
+    return (
+        <NumberFormat
+            {...other}
+            getInputRef={inputRef}
+            onValueChange={(values) => {
+                onChange({
+                    target: {
+                        name: props.name,
+                        value: values.value,
+                    },
+                });
+            }}
+            decimalSeparator="."
+            fixedDecimalScale
+            isNumericString
+            suffix="%"
+        />
+    );
+}
+
+NumberFormatCustom.propTypes = {
+    inputRef: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+};
+
+const ImportPage = ({ dispatchCreateBudget }) => {
     const [uploadedFiles, setUploadedFiles] = useState([]);
-    const [budgetFilled, setBudgetFilled] = useState([])
     const [optionsUF, setOptionsUF] = useState("")
-    const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'
+    const [database, setDatabase] = useState("")
+    const [company, setCompany] = useState("")
+    const [values, setValues] = useState({
+        textmask: '',
+        numberformat: '',
+    });
 
     function download(data) {
         const worksheet = XLSX.utils.json_to_sheet(data)
@@ -31,9 +67,9 @@ const ImportPage = ({ dispatchCreateBudget, dispatchGetAllBudgets }) => {
         saveAsExcel(excelBuffer)
     }
 
-    function saveAsExcel(buffer, filename) {
-        const data = new Blob([buffer], { type: EXCEL_TYPE })
-        saveAs(data, filename + '_export_' + new Date().getTime())
+    function saveAsExcel(buffer) {
+        const data = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' })
+        saveAs(data, 'orçamento_export_' + new Date().getTime())
     }
 
     const handleUpload = (files) => {
@@ -42,13 +78,12 @@ const ImportPage = ({ dispatchCreateBudget, dispatchGetAllBudgets }) => {
             id: uniqueId(),
             name: file.name,
             readbleSize: fileSize(file.size),
-            progress: 0,
             uploaded: false,
             error: false,
             budget: []
         }))
 
-        setUploadedFiles((uploadedFiles.concat(fileUpload)))
+        setUploadedFiles(fileUpload)
     }
 
     for (const item of uploadedFiles) {
@@ -65,31 +100,27 @@ const ImportPage = ({ dispatchCreateBudget, dispatchGetAllBudgets }) => {
                 defval: null
             })
             item.budget = result
-
-            if (!item.uploaded && item.budget.length >= 1) {
-                handleSubmmit(item.budget)
-                item.uploaded = true
-            }
+            item.uploaded = true
         }
+        console.log(uploadedFiles[0].uploaded)
     };
+
+
 
     const handleSubmmit = (item) => {
         dispatchCreateBudget(
             item,
-            (response) =>  download(response.data),
+            (response) => download(response.data),
             (error) => console.log(error)
-        )       
-    }    
+        )
+    }
 
-    const updateFile = (id, data) => {
-        setUploadedFiles(
-            uploadedFiles.map((uploadedFiles) => {
-                return id === uploadedFiles.id
-                    ? { ...uploadedFiles, ...data }
-                    : uploadedFiles;
-            })
-        );
-    };
+    const handleChange = (event) => {
+        setValues({
+            ...values,
+            [event.target.name]: event.target.value,
+        });
+    }
 
     const ufOptions = [
         {
@@ -110,21 +141,84 @@ const ImportPage = ({ dispatchCreateBudget, dispatchGetAllBudgets }) => {
         <div className="budget-page">
             <div>
                 <h2 className="budget-title">Orçamento</h2>
-                <p className="budget-db-select-label">Selecionar DB e UF</p>
-                <select className="budget-db-select" value="">
-                    <option key="dr" value="dr">DR</option>
-                </select>
-                <select className="budget-uf-select" placeholder="UF" value={optionsUF} onChange={e => setOptionsUF(e.target.value)}>
-                    {ufOptions.map((option) => (
-                        <option key={option.value} value={option.value}>{option.label}</option>
-                    ))}
-                </select>
-                <p className="budget-db-select-label">Importar Tabela</p>
-                <div className="upload-container">
-                    <UploadFile onUpload={handleUpload} />
-                    {uploadedFiles.length > 0 ? <FileList files={uploadedFiles} /> : null}
+                <p className="budget-db-select-label">Dados para criação da cotação</p>
+                <div className="budget-input-data">
+                    <TextField
+                        label="Database"
+                        select
+                        size="small"
+                        variant="outlined"
+                        inputProps={{ style: { fontSize: 13 } }}
+                        InputLabelProps={{ style: { fontSize: 13, } }}
+                        SelectProps={{
+                            native: true,
+                        }}
+                        style={{ width: 300, marginTop: 15 }}
+                        onChange={(e) => setDatabase(e.target.value)}
+                    >
+                        <option value="" defaultValue hidden></option>
+                        <option className="option-select-item" value="der">DER</option>
+                        <option className="option-select-item" value="sicro">Sicro</option>
+                    </TextField>
+                    <TextField
+                        label="UF"
+                        select
+                        size="small"
+                        variant="outlined"
+                        inputProps={{ style: { fontSize: 13 } }}
+                        InputLabelProps={{ style: { fontSize: 13 } }}
+                        SelectProps={{
+                            native: true,
+                        }}
+                        style={{ width: 300, marginTop: 15 }}
+                        onChange={e => setOptionsUF(e.target.value)}
+                    >
+                        <option value="" defaultValue hidden></option>
+                        {ufOptions.map((option) => (
+                            <option key={option.value} value={option.value}>{option.label}</option>
+                        ))}
+                    </TextField>
+                    <TextField
+                        label="Empresa"
+                        select
+                        size="small"
+                        variant="outlined"
+                        inputProps={{ style: { fontSize: 13 } }}
+                        InputLabelProps={{ style: { fontSize: 13 } }}
+                        SelectProps={{
+                            native: true,
+                        }}
+                        style={{ width: 300, marginTop: 10 }}
+                        onChange={e => setCompany(e.target.value)}
+                    >
+                        <option value="" defaultValue hidden></option>
+                        <option className="option-select-item" value="arteris">Arteris</option>
+                        <option value="via_paulista">Via Paulista</option>
+                    </TextField>
+                    <TextField
+                        label="Imposto"
+                        name="numberformat"
+                        id="formatted-numberformat-input"
+                        size="small"
+                        variant="outlined"
+                        style={{ width: 300, marginTop: 15 }}
+                        InputProps={{
+                            inputComponent: NumberFormatCustom,
+                        }}
+                        onChange={handleChange}
+                        value={values.numberformat}
+                        inputProps={{
+                            maxLength: 4,
+                            style: { fontSize: 13 }
+                        }}
+                        InputLabelProps={{ style: { fontSize: 13 } }}
+                    />
+                    <div className="budget-upload-container">
+                        <UploadFile onUpload={handleUpload} />
+                        {uploadedFiles.length > 0 ? <FileList files={uploadedFiles} /> : null}
+                    </div>
+                    <CustomButton name="Gerar Cotação" id="budget-create-button" onChange={() => handleSubmmit(uploadedFiles[0].budget)} />
                 </div>
-                <button onClick={() => dispatchGetAllBudgets()}>Get Budget</button>
             </div>
         </div>
     )

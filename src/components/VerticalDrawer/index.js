@@ -26,10 +26,14 @@ const VerticalDrawer = () => {
                 </Link>
                 <li>{subnav ?
                     <div>
-                        <Link className="vertical-menu-item" to="/database">
+                        <Link className="vertical-menu-item" to="/database-der">
                             <FiIcons.FiChevronRight size={20} />
-                            <p className="vertical-menu-title">DR</p>
-                        </Link>                        
+                            <p className="vertical-menu-title">DER</p>
+                        </Link>  
+                        <Link className="vertical-menu-item" to="/database-sicro">
+                            <FiIcons.FiChevronRight size={20} />
+                            <p className="vertical-menu-title">Sicro</p>
+                        </Link>                             
                     </div>
                     : null
                 }

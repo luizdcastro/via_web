@@ -6,7 +6,7 @@ const UploadFile = ({onUpload}) => {
 
     const renderDragMessage = (isDragActive, isDragReject) => {
         if (!isDragActive) {
-            return <UploadMessage>Arraste sua planinha aqui</UploadMessage>
+            return <UploadMessage>Importar planilha</UploadMessage>
         }
         if (isDragReject) {
             return <UploadMessage type="error">Arquino não suportado</UploadMessage>
@@ -17,7 +17,7 @@ const UploadFile = ({onUpload}) => {
     return (
 
         <Dropzone
-            accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" onDropAccepted={onUpload} multiple={false} >
+            accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" onDropAccepted={onUpload} multiple={false}>
             {({ getRootProps, getInputProps, isDragActive, isDragReject }) => (
                 <DropContainer
                     {...getRootProps()}

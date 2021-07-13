@@ -1,5 +1,7 @@
 .logs-page{   
     display: flex;
+    background-color: #fafafa;
+    height: 100vh;
     margin-left: 220px;
     padding-top: 30px;  
     padding-left: 30px;

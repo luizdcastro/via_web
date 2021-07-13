@@ -15,7 +15,7 @@ const FileList = ({ files }) => {
                     <FileInfo>
                         <Preview src={ExcelIcon} />
                         <div>
-                            <strong style={{fontSize: 12}}>{uploadedFile.name}</strong>
+                            <strong style={{fontSize: 11}}>{uploadedFile.name}</strong>
                             <span >
                                 {uploadedFile.readbleSize}                               
                             </span>
@@ -23,10 +23,10 @@ const FileList = ({ files }) => {
                     </FileInfo>
                     <div>
                         {!uploadedFile.uploaded && !uploadedFile.error && (
-                           <Ellipsis color="#be97e8" size={45} /> 
+                           <Ellipsis color="#516078" size={40} /> 
                         )}                      
-                        {uploadedFile.uploaded && <MdCheckCircle size={22} color="#78e5d5" />}
-                        {uploadedFile.error && (<MdError size={22} color="#e57878" />)}
+                        {uploadedFile.uploaded && <MdCheckCircle size={20} color="#78e5d5" />}
+                        {uploadedFile.error && (<MdError size={20} color="#e57878" />)}
                     </div>
                 </li>
             ))}
