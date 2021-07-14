@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@bit/joshk.react-spinners-css.default": "^1.2.1",
     "@bit/joshk.react-spinners-css.ellipsis": "^1.2.1",
     "@bit/joshk.react-spinners-css.facebook": "^1.2.1",
     "@material-ui/core": "^4.11.4",

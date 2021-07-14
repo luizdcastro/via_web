@@ -15,7 +15,7 @@
 }
 
 .budget-upload-container {
-    max-width: 300px;
+    max-width: 325px;
     margin-top: 15px;
     border-radius: 4px;  
     padding: 5px;
@@ -30,7 +30,6 @@
 .budget-db-select-label{
     font-size: 15px;
     color: #516078;
-
 }
 
 .budget-select{
@@ -62,11 +61,51 @@
 }
 
 #budget-create-button{
-    width: 300px;
+    width: 325px;
     height: 40px;
     margin-top: 15px;
     font-size: 13px;
     font-weight: 500;
-    background-color: #516078;
-    border: solid 1px #516078;
+    background-color: #455A64;
+    border: solid 1px #455A64;
+    color: #fff;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#budget-create-button:hover{
+    cursor: pointer;
+    background-color: #546E7A;
+    border: solid 1px #546E7A;
+}
+
+
+#budget-create-button-disabled{
+    width: 325px;
+    height: 40px;
+    margin-top: 15px;
+    font-size: 13px;
+    font-weight: 500;
+    border: solid 1px #E0E0E0;
+    background-color: #E0E0E0;
+    color: #9E9E9E;
+}
+
+#budget-create-button-disabled:hover{
+    cursor: default;
+    filter: none    
+}
+
+.budget-sucess-message{
+    margin-top: 10px;
+    font-size: 13px;
+    color: #43A047;
+    font-weight: 500;
+}
+
+.budget-error-message{
+    margin-top: 10px;
+    font-size: 13px;
+    color: #E53935;
+    font-weight: 500;
 }

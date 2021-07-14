@@ -1,0 +1,123 @@
+.login-container {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    background-color: #fafafa;
+  }
+
+  .login-banner{
+    display: flex;
+    flex: 1;
+    width: 100vw;
+    height: 100vh;
+    background: url('../../assets/images/login.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    }
+
+  .login-content{  
+    display: flex;
+    align-items: center;
+    flex: 1;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    padding-left: 20px ;
+    padding-right: 20px;
+    padding-top: 5%;
+  }
+  
+  .login {
+    display: block;
+    background-color: #fafafa;
+    height: 500px;
+    width: 372px;
+    justify-content: center;
+  }
+  
+  .login-title {
+    font-size: 25px;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 25px;
+    color: #516078;
+  }
+
+  .login-label {
+    font-weight: 400;
+    color: #777;
+    margin-bottom: 5px;    
+    font-size: 16px;
+  }
+  
+  #login-input {
+    padding-left: 12px;
+    margin-top: 0;
+    margin-bottom: 12px;
+  }
+  
+  #login-input__password{
+    padding-left: 12px;
+    margin-top: 0;    
+    margin-bottom: 15px;
+  } 
+   
+  .login-error {
+    font-size: 14px;
+    color: #BA000D;    
+    padding-top: 5px;
+  }  
+
+  #login-button{
+    margin-top: 25px;
+    margin-bottom: 15px;
+  }
+
+  #login-button-separator {
+    background-color: #fafafa;
+    color: #523BE4;
+    margin-top: 25px;
+  }
+  
+  .login-link__password {
+    display: flex;
+    font-size: 14px;
+    margin-top: 8px;
+    font-weight: 600;
+    color: rgb(84, 123, 220);
+    justify-content: flex-end;
+    text-decoration: underline;
+  }
+
+  .login-link__password:hover {
+    color: #523BE4;
+    text-decoration: none;
+  }
+
+  .login-separator {
+    margin-top: 25px;
+    border-top: solid 1px #dadce1;
+  }
+
+  .login-link__text{
+    font-size: 16px;
+    font-weight: 400;
+    color: #777;
+    margin-top: 25px;
+    text-align: center;
+  } 
+  
+  .login-link:hover {
+    filter: brightness(1.1);
+  }
+  
+  @media screen and (max-width: 800px) {
+    .login-banner {
+      flex: 0
+    }
+    .login-content {
+      align-items: center;
+      padding-top: 0;
+    }
+  }

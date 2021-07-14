@@ -1,0 +1,77 @@
+.account-page{   
+    display: flex;
+    background-color: #fafafa;
+    height: 100vh;
+    margin-left: 220px;
+    padding-top: 30px;  
+    padding-left: 30px;
+}
+
+.account-title{    
+    font-weight: 400;
+    font-size: 1.5em;
+    color: rgba(0,0,0,.85);
+    margin-bottom: 20px;
+}
+
+
+.account-data-label{
+    font-size: 15px;
+    color: #516078;
+}
+
+.account-input-data{
+    display: block;   
+    width: 400px; 
+}
+
+.acccount-separator {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    width: 325px;
+    border-top: solid 1px #dadce1;
+}
+
+.account-password-label{
+    font-size: 15px;
+    color: #516078;
+    margin-top: 15px;
+}
+
+#account-create-button{
+    width: 325px;
+    height: 40px;
+    margin-top: 15px;
+    font-size: 13px;
+    font-weight: 500;
+    background-color: #455A64;
+    border: solid 1px #455A64;
+    color: #fff;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#account-create-button:hover{
+    cursor: pointer;
+    background-color: #546E7A;
+    border: solid 1px #546E7A;
+}
+
+#account-create-button-light{
+    width: 325px;
+    height: 40px;
+    margin-top: 15px;
+    font-size: 13px;
+    font-weight: 500;
+    background-color: #fafafa;
+    border: solid 1.5px #455A64;
+    color: #455A64;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#account-create-button-light:hover{
+    cursor: pointer;
+    opacity: 0.7;
+    border: solid 1px #546E7A;
+}

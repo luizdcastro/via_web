@@ -22,6 +22,11 @@
     border: 1px solid rgb(224,224,224);    
 }
 
+.import-input-data{
+    display: block;   
+    width: 400px; 
+}
+
 .import-db-select-label{
     font-size: 15px;
     color: #516078;
@@ -40,18 +45,52 @@
     outline: none
 }
 
-#budget-create-button-disabled{
-    width: 300px;
+#import-create-button{
+    width: 325px;
     height: 40px;
     margin-top: 15px;
     font-size: 13px;
     font-weight: 500;
-    border: solid 1px #D0D0D0;
-    background-color: #D0D0D0;
-    color: #fafafa;
+    background-color: #455A64;
+    border: solid 1px #455A64;
+    color: #fff;
+    border-radius: 3px;
+    cursor: pointer;
 }
 
-#budget-create-button-disabled:hover{
+#import-create-button:hover{
+    cursor: pointer;
+    background-color: #546E7A;
+    border: solid 1px #546E7A;
+}
+
+
+#import-create-button-disabled{
+    width: 325px;
+    height: 40px;
+    margin-top: 15px;
+    font-size: 13px;
+    font-weight: 500;
+    border: solid 1px #E0E0E0;
+    background-color: #E0E0E0;
+    color: #9E9E9E;
+}
+
+#import-create-button-disabled:hover{
     cursor: default;
     filter: none    
+}
+
+.import-sucess-message{
+    margin-top: 10px;
+    font-size: 13px;
+    color: #43A047;
+    font-weight: 500;
+}
+
+.import-error-message{
+    margin-top: 10px;
+    font-size: 13px;
+    color: #E53935;
+    font-weight: 500;
 }

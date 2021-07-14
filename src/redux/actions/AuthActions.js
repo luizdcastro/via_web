@@ -12,6 +12,19 @@ export const loginUser = (data, onSuccess, onError) => ({
     },
 });
 
+export const updatePassword = (data, onSuccess, onError) => ({
+    type: constants.API,
+    payload: {
+        method: 'POST',
+        url: '/auth/update-password',
+        data,
+        success: (response) => setUserInfo(response),
+        postProccessSuccess: onSuccess,
+        postProccessError: onError,
+    },
+});
+
+
 export const logoutUser = () => {
     localStorage.removeItem('user');
     return { type: constants.RESET_USER_INFO };

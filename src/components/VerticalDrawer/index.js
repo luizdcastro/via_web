@@ -4,7 +4,7 @@ import * as FiIcons from 'react-icons/fi'
 import './styles.css'
 
 const VerticalDrawer = () => {
-    const [subnav, setSubnav] = useState(false)  
+    const [subnav, setSubnav] = useState(false)
 
     return (
         <div className="vertical-container">
@@ -15,25 +15,25 @@ const VerticalDrawer = () => {
                         <p className="vertical-menu-title">Orçamento</p>
                     </Link>
                 </li>
-                <Link className="vertical-menu-item" onClick={() => setSubnav(!subnav)}>
+                <Link className="vertical-menu-item" to="" onClick={() => setSubnav(!subnav)}>
                     <FiIcons.FiDatabase size={22} />
                     <p className="vertical-menu-title">Database</p>
-                    {                        !subnav ? 
+                    {!subnav ?
                         <FiIcons.FiChevronDown className="vertical-drop-icon" size={20} />
                         :
                         <FiIcons.FiChevronUp className="vertical-drop-icon" size={20} />
-                    }                    
+                    }
                 </Link>
                 <li>{subnav ?
                     <div>
                         <Link className="vertical-menu-item" to="/database-der">
-                            <FiIcons.FiChevronRight size={20} />
+                            <FiIcons.FiCode size={20} />
                             <p className="vertical-menu-title">DER</p>
-                        </Link>  
+                        </Link>
                         <Link className="vertical-menu-item" to="/database-sicro">
-                            <FiIcons.FiChevronRight size={20} />
+                            <FiIcons.FiCode size={20} />
                             <p className="vertical-menu-title">Sicro</p>
-                        </Link>                             
+                        </Link>
                     </div>
                     : null
                 }
@@ -50,6 +50,15 @@ const VerticalDrawer = () => {
                         <p className="vertical-menu-title">Registros</p>
                     </Link>
                 </li>
+                <div style={{ position: 'absolute', bottom: 15, width: '100%' }}>
+                    <li>
+                        <Link className="vertical-menu-item" to="/configurações">
+                            <FiIcons.FiSettings size={22} />
+                            <p className="vertical-menu-title">Configurações</p>
+                        </Link>
+                    </li>
+                </div>
+
             </ul>
         </div>
     )

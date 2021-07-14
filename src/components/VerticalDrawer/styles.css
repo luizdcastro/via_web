@@ -26,7 +26,7 @@
 }
 
 .vertical-menu-item:hover {
-    background-color:rgb(240,240,240);
+    background-color:#e6e6e6;
     border-radius: 8px;
     color: #105efb;
 }

@@ -1,10 +1,10 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { connect } from "react-redux";
 import UploadFile from '../../components/UploadFile'
 import FileList from '../../components/FileList'
 import TextField from '@material-ui/core/TextField';
-import CustomButton from '../../components/CustomButton'
+import Ellipsis from '@bit/joshk.react-spinners-css.ellipsis';
 import { uniqueId } from 'lodash'
 import fileSize from 'filesize'
 import * as XLSX from 'xlsx'
@@ -18,6 +18,9 @@ const ImportPage = ({ dispatchCreateDer, dispatchCreateSicro, dispatchGetAllDers
     const [uploadedFiles, setUploadedFiles] = useState([]);
     const [optionsUF, setOptionsUF] = useState("")
     const [database, setDatabase] = useState("")
+    const [loading, setLoading] = useState(false)
+    const [sucessMessage, setSucessMessage]  = useState(false)    
+    const [errorMessage, setErrorMessage] = useState(false)
 
     const handleUpload = (files) => {
         const fileUpload = files.map(file => ({
@@ -31,6 +34,8 @@ const ImportPage = ({ dispatchCreateDer, dispatchCreateSicro, dispatchGetAllDers
             table: []
         }))
         setUploadedFiles(fileUpload)
+        setSucessMessage(false)     
+        setErrorMessage(false)      
     }
 
     for (const item of uploadedFiles) {
@@ -55,23 +60,38 @@ const ImportPage = ({ dispatchCreateDer, dispatchCreateSicro, dispatchGetAllDers
     };
 
     const handleSubmmit = (item) => {
-        if (database == 'der') {
+
+        if (database === 'der') {
+            setLoading(true)
             dispatchCreateDer(
-                { table: item.der, state: optionsUF },
+                { table: item.table, state: optionsUF },
                 (response) => {
-                    dispatchGetAllDers()
+                    setLoading(false);
+                    dispatchGetAllDers();                  
+                    setUploadedFiles([])
+                    setSucessMessage(true)
                 },
-                (error) => console.log(error)
+                (error) => {
+                    setLoading(false);
+                    setErrorMessage(true)
+                }
+
             )
         }
 
-        if (database == 'sicro') {
+        if (database === 'sicro') {
             dispatchCreateSicro(
-                { table: item.sicro, state: optionsUF },
+                { table: item.table, state: optionsUF },
                 (response) => {
-                    dispatchGetAllSicros()
+                    setLoading(false);
+                    dispatchGetAllSicros();                  
+                    setUploadedFiles([])
+                    setSucessMessage(true)
                 },
-                (error) => console.log(error)
+                (error) => {
+                    setLoading(false);
+                    setErrorMessage(true)
+                }
             )
         }
     }
@@ -106,7 +126,7 @@ const ImportPage = ({ dispatchCreateDer, dispatchCreateSicro, dispatchGetAllDers
             <div>
                 <h2 className="homepage-title">Atualizar</h2>
                 <p className="import-db-select-label">Dados para atualização do DB</p>
-                <div className="budget-input-data">
+                <div className="import-input-data">
                     <TextField
                         label="Database"
                         select
@@ -117,7 +137,7 @@ const ImportPage = ({ dispatchCreateDer, dispatchCreateSicro, dispatchGetAllDers
                         SelectProps={{
                             native: true,
                         }}
-                        style={{ width: 300, marginTop: 15 }}
+                        style={{ width: 325, marginTop: 15 }}
                         onChange={(e) => setDatabase(e.target.value)}
                     >
                         <option value="" defaultValue hidden></option>
@@ -134,7 +154,7 @@ const ImportPage = ({ dispatchCreateDer, dispatchCreateSicro, dispatchGetAllDers
                         SelectProps={{
                             native: true,
                         }}
-                        style={{ width: 300, marginTop: 15 }}
+                        style={{ width: 325, marginTop: 15 }}
                         onChange={e => setOptionsUF(e.target.value)}
                     >
                         <option value="" defaultValue hidden></option>
@@ -148,12 +168,18 @@ const ImportPage = ({ dispatchCreateDer, dispatchCreateSicro, dispatchGetAllDers
                     </div>
                     {
                         !!database & !!optionsUF & uploadedFiles.length >= 1 ?
-                        <CustomButton name="Importar Dados" id="budget-create-button" onChange={() => { }} />
-                        :
-                        <CustomButton name="Importar Dados" id="budget-create-button-disabled" disabled/>
+                            <button id="budget-create-button" disabled={loading ? true : false}  onClick={() => handleSubmmit(uploadedFiles[0])}>
+                                {
+                                    !loading ? 'Importar Dados' : <span><Ellipsis color="#FFF" size={42} /></span>
+                                }
+                            </button>
+                            :
+                            <button id="budget-create-button-disabled" disabled>Importar Dados</button>
                     }
-                    
+
                 </div>
+                {sucessMessage && (<p className="import-sucess-message">Database atualizado com sucesso</p>) }       
+                {errorMessage && (<p className="import-error-message">Um erro ocorreu durante atualização</p>) }            
             </div>
         </div>
     )

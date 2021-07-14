@@ -2,8 +2,8 @@
     display: block;
     width: 372px;
     height: 45px;
-    background-color: #105efb;
-    border: solid 1px #105efb;
+    background-color: #455A64;
+    border: solid 1px #455A64;
     border-radius: 3px;
     color: #fff;
     font-size: 16px;
@@ -17,7 +17,7 @@
   
   .custom-button:hover {
     cursor: pointer;
-    filter: brightness(1.1);
+    background-color: #546E7A;
   }
   
   .loading-spinner {

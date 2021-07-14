@@ -1,7 +1,6 @@
 import React from 'react'
-import { MdCheckCircle, MdError } from 'react-icons/md'
-import Ellipsis from '@bit/joshk.react-spinners-css.ellipsis';
-
+import * as FiIcons from 'react-icons/fi'
+import Default from '@bit/joshk.react-spinners-css.default';
 
 import { Container, FileInfo, Preview } from './styles'
 import ExcelIcon from '../../assets/icons/excel.png'
@@ -21,12 +20,12 @@ const FileList = ({ files }) => {
                             </span>
                         </div>
                     </FileInfo>
-                    <div>
+                    <div style={{display: 'flex'}}>
                         {!uploadedFile.uploaded && !uploadedFile.error && (
-                           <Ellipsis color="#516078" size={40} /> 
+                           <Default color="#516078" size={29} /> 
                         )}                      
-                        {uploadedFile.uploaded && <MdCheckCircle size={20} color="#78e5d5" />}
-                        {uploadedFile.error && (<MdError size={20} color="#e57878" />)}
+                        {uploadedFile.uploaded && <FiIcons.FiCheckSquare size={21} color="#43A047" />}
+                        {uploadedFile.error && (<FiIcons.FiAlertTriangle size={21} color="#E53935" />)}
                     </div>
                 </li>
             ))}

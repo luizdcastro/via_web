@@ -1,0 +1,19 @@
+.form-input {
+    display: block;
+    width: 375px;
+    height: 50px;
+    border: solid 1px #dadce1;
+    background-color: #fafafa;
+    border-radius: 3px;
+    font-size: 15px;
+    font-weight: 300;
+  }
+  
+  .form-input:focus {
+    outline: none;
+    border: solid 1px #546E7A;
+  }
+  
+  .form-input:hover {
+    border: solid 1px #546E7A;
+  }

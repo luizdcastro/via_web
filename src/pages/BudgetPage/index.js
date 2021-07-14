@@ -8,9 +8,9 @@ import fileSize from 'filesize'
 import * as XLSX from 'xlsx'
 import { saveAs } from 'file-saver';
 import TextField from '@material-ui/core/TextField';
+import Ellipsis from '@bit/joshk.react-spinners-css.ellipsis';
 import NumberFormat from 'react-number-format';
 import PropTypes from 'prop-types';
-import CustomButton from '../../components/CustomButton'
 
 import { createBudget, getAllBudgets } from '../../redux/actions/BudgetActions'
 
@@ -50,6 +50,9 @@ const ImportPage = ({ dispatchCreateBudget }) => {
     const [optionsUF, setOptionsUF] = useState("")
     const [database, setDatabase] = useState("")
     const [company, setCompany] = useState("")
+    const [loading, setLoading] = useState(false)
+    const [sucessMessage, setSucessMessage] = useState(false)
+    const [errorMessage, setErrorMessage] = useState(false)
     const [values, setValues] = useState({
         textmask: '',
         numberformat: '',
@@ -80,10 +83,12 @@ const ImportPage = ({ dispatchCreateBudget }) => {
             readbleSize: fileSize(file.size),
             uploaded: false,
             error: false,
-            budget: []
+            table: []
         }))
 
         setUploadedFiles(fileUpload)
+        setSucessMessage(false)
+        setErrorMessage(false)
     }
 
     for (const item of uploadedFiles) {
@@ -99,19 +104,31 @@ const ImportPage = ({ dispatchCreateBudget }) => {
             const result = XLSX.utils.sheet_to_json(ws, {
                 defval: null
             })
-            item.budget = result
-            item.uploaded = true
+            item.table = result
+            if (!item.uploaded && item.table.length >= 1) {
+                updateFile(item.id, {
+                    uploaded: true
+                })
+            }
+
         }
-        console.log(uploadedFiles[0].uploaded)
     };
 
-
-
     const handleSubmmit = (item) => {
+        setLoading(true)
         dispatchCreateBudget(
-            item,
-            (response) => download(response.data),
-            (error) => console.log(error)
+            { table: item.table, company: company, database: database, state: optionsUF, tax: values.numberformat },
+            (response) => {
+                download(response.data);
+                setLoading(false);
+                setUploadedFiles([])
+                setSucessMessage(true)
+            },
+            (error) => {
+                setLoading(false);
+                setErrorMessage(true)
+                console.log(error)
+            }
         )
     }
 
@@ -137,6 +154,16 @@ const ImportPage = ({ dispatchCreateBudget }) => {
         },
     ]
 
+    const updateFile = (id, data) => {
+        setUploadedFiles(
+            uploadedFiles.map((uploadedFiles) => {
+                return id === uploadedFiles.id
+                    ? { ...uploadedFiles, ...data }
+                    : uploadedFiles;
+            })
+        );
+    };
+
     return (
         <div className="budget-page">
             <div>
@@ -153,7 +180,7 @@ const ImportPage = ({ dispatchCreateBudget }) => {
                         SelectProps={{
                             native: true,
                         }}
-                        style={{ width: 300, marginTop: 15 }}
+                        style={{ width: 325, marginTop: 15 }}
                         onChange={(e) => setDatabase(e.target.value)}
                     >
                         <option value="" defaultValue hidden></option>
@@ -170,7 +197,7 @@ const ImportPage = ({ dispatchCreateBudget }) => {
                         SelectProps={{
                             native: true,
                         }}
-                        style={{ width: 300, marginTop: 15 }}
+                        style={{ width: 325, marginTop: 15 }}
                         onChange={e => setOptionsUF(e.target.value)}
                     >
                         <option value="" defaultValue hidden></option>
@@ -188,7 +215,7 @@ const ImportPage = ({ dispatchCreateBudget }) => {
                         SelectProps={{
                             native: true,
                         }}
-                        style={{ width: 300, marginTop: 10 }}
+                        style={{ width: 325, marginTop: 10 }}
                         onChange={e => setCompany(e.target.value)}
                     >
                         <option value="" defaultValue hidden></option>
@@ -201,7 +228,7 @@ const ImportPage = ({ dispatchCreateBudget }) => {
                         id="formatted-numberformat-input"
                         size="small"
                         variant="outlined"
-                        style={{ width: 300, marginTop: 15 }}
+                        style={{ width: 325, marginTop: 15 }}
                         InputProps={{
                             inputComponent: NumberFormatCustom,
                         }}
@@ -217,8 +244,19 @@ const ImportPage = ({ dispatchCreateBudget }) => {
                         <UploadFile onUpload={handleUpload} />
                         {uploadedFiles.length > 0 ? <FileList files={uploadedFiles} /> : null}
                     </div>
-                    <CustomButton name="Gerar Cotação" id="budget-create-button" onChange={() => handleSubmmit(uploadedFiles[0].budget)} />
+                    {
+                        !!database & !!optionsUF & uploadedFiles.length >= 1 & !!company & !!values ?
+                            <button id="budget-create-button" disabled={loading ? true : false} onClick={() => handleSubmmit(uploadedFiles[0])}>
+                                {
+                                    !loading ? 'Importar Dados' : <span><Ellipsis color="#FFF" size={42} /></span>
+                                }
+                            </button>
+                            :
+                            <button id="budget-create-button-disabled" disabled>Importar Dados</button>
+                    }
                 </div>
+                {sucessMessage && (<p className="budget-sucess-message">Orçamento criado com sucesso</p>)}
+                {errorMessage && (<p className="budget-error-message">Um erro ocorreu durante a criação do orçamento</p>)}
             </div>
         </div>
     )
