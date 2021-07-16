@@ -8,6 +8,7 @@ import Ellipsis from '@bit/joshk.react-spinners-css.ellipsis';
 import { uniqueId } from 'lodash'
 import fileSize from 'filesize'
 import * as XLSX from 'xlsx'
+import ufOptions from '../../assets/data/ufOptions.json';
 
 import { createDer, getAllDers } from '../../redux/actions/DerActions'
 import { createSicro, getAllSicros } from '../../redux/actions/SicroActions'
@@ -106,25 +107,10 @@ const ImportPage = ({ dispatchCreateDer, dispatchCreateSicro, dispatchGetAllDers
         );
     };
 
-    const ufOptions = [
-        {
-            label: "PR",
-            value: "pr"
-        },
-        {
-            label: "SP",
-            value: "sp"
-        },
-        {
-            label: "RS",
-            value: "rs"
-        },
-    ]
-
     return (
         <div className="import-page">
             <div>
-                <h2 className="homepage-title">Atualizar</h2>
+                <h2 className="homepage-title">Importar</h2>
                 <p className="import-db-select-label">Dados para atualização do DB</p>
                 <div className="import-input-data">
                     <TextField

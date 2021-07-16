@@ -103,21 +103,49 @@ const DerPage = ({ dispatchUpdateDer, dispatchGetAllDers, der }) => {
 
     const ufOptions = [
         {
-            label: "Todos",
-            value: ""
+            "label": "Todos",
+            "value": ""
         },
         {
-            label: "PR",
-            value: "pr"
+            "label": "ES",
+            "value": "es"
         },
         {
-            label: "SP",
-            value: "sp"
+            "label": "GO",
+            "value": "go"
         },
         {
-            label: "RS",
-            value: "rs"
+            "label": "MG",
+            "value": "mg"
         },
+        {
+            "label": "MS",
+            "value": "ms"
+        },
+        {
+            "label": "MT",
+            "value": "mt"
+        },
+        {
+            "label": "RJ",
+            "value": "rj"
+        },
+        {
+            "label": "RS",
+            "value": "rs"
+        },
+        {
+            "label": "SC",
+            "value": "sc"
+        },
+        {
+            "label": "SP",
+            "value": "sp"
+        },
+        {
+            "label": "PR",
+            "value": "pr"
+        }
     ]
 
 

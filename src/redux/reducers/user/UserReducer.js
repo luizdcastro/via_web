@@ -1,7 +1,7 @@
 import * as constants from '../../constants';
 
 const defaultState = {
-  businessId: null,
+  user_id: null,
   token: null,
   isLoggedIn: null,
 };

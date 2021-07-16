@@ -15,8 +15,8 @@ export const loginUser = (data, onSuccess, onError) => ({
 export const updatePassword = (data, onSuccess, onError) => ({
     type: constants.API,
     payload: {
-        method: 'POST',
-        url: '/auth/update-password',
+        method: 'PATCH',
+        url: '/auth/updatePassword',
         data,
         success: (response) => setUserInfo(response),
         postProccessSuccess: onSuccess,

@@ -11,6 +11,7 @@ import TextField from '@material-ui/core/TextField';
 import Ellipsis from '@bit/joshk.react-spinners-css.ellipsis';
 import NumberFormat from 'react-number-format';
 import PropTypes from 'prop-types';
+import ufOptions from '../../assets/data/ufOptions.json';
 
 import { createBudget, getAllBudgets } from '../../redux/actions/BudgetActions'
 
@@ -139,21 +140,6 @@ const ImportPage = ({ dispatchCreateBudget }) => {
         });
     }
 
-    const ufOptions = [
-        {
-            label: "PR",
-            value: "pr"
-        },
-        {
-            label: "SP",
-            value: "sp"
-        },
-        {
-            label: "RS",
-            value: "rs"
-        },
-    ]
-
     const updateFile = (id, data) => {
         setUploadedFiles(
             uploadedFiles.map((uploadedFiles) => {
@@ -223,7 +209,7 @@ const ImportPage = ({ dispatchCreateBudget }) => {
                         <option value="via_paulista">Via Paulista</option>
                     </TextField>
                     <TextField
-                        label="Imposto"
+                        label="BDI"
                         name="numberformat"
                         id="formatted-numberformat-input"
                         size="small"
@@ -248,11 +234,11 @@ const ImportPage = ({ dispatchCreateBudget }) => {
                         !!database & !!optionsUF & uploadedFiles.length >= 1 & !!company & !!values ?
                             <button id="budget-create-button" disabled={loading ? true : false} onClick={() => handleSubmmit(uploadedFiles[0])}>
                                 {
-                                    !loading ? 'Importar Dados' : <span><Ellipsis color="#FFF" size={42} /></span>
+                                    !loading ? 'Gerar Orçamento' : <span><Ellipsis color="#FFF" size={42} /></span>
                                 }
                             </button>
                             :
-                            <button id="budget-create-button-disabled" disabled>Importar Dados</button>
+                            <button id="budget-create-button-disabled" disabled>Gerar Orçamento</button>
                     }
                 </div>
                 {sucessMessage && (<p className="budget-sucess-message">Orçamento criado com sucesso</p>)}

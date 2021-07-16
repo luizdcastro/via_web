@@ -28,7 +28,7 @@ const Login = ({ dispatchLoginAction }) => {
       <div className="login-content">
         <div className="login">
           <form onSubmit={handleOnSubmmit}>
-            <h1 className="login-title">Acessar Database</h1>
+            <h1 className="login-title">Acessar Neovia DB</h1>
             <p className="login-label">Email</p>
             <FormInput
               id="login-input"

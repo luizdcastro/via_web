@@ -3,7 +3,7 @@
     justify-content: center;
     position: absolute;
     width: 220px;
-    height: 100%;   
+    height: 100vh;   
     background-color: #f0f0f0;
 }
 
@@ -19,6 +19,18 @@
     margin-bottom: 6px;
     padding-left: 20px;
     color: #516078;
+}
+
+.menu-item-active{
+    display: flex;
+    align-items: center;
+    width: 200px;
+    height: 40px;
+    margin-bottom: 6px;
+    padding-left: 20px;
+    color: #105efb;
+    background-color:#e6e6e6;
+    border-radius: 8px;
 }
 
 .vertical-drop-icon{
