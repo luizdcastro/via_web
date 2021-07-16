@@ -6,7 +6,7 @@ import { logoutUser } from "../redux/actions/AuthActions";
 export const apiMiddleware = ({ dispatch, getState }) => (next) => (action) => {
     if (action.type !== constants.API) return next(action);
 
-    const BASE_URL = "http://localhost:8000/v1";
+    const BASE_URL = "https://neovia-api.herokuapp.com/v1";
     const AUTH_TOKEN = getState().user.token;
     if (AUTH_TOKEN)
         axios.defaults.headers.common["Authorization"] = `Bearer ${AUTH_TOKEN}`;

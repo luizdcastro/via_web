@@ -8,7 +8,7 @@ import fileSize from 'filesize'
 import * as XLSX from 'xlsx'
 import { saveAs } from 'file-saver';
 import TextField from '@material-ui/core/TextField';
-import Ellipsis from '@bit/joshk.react-spinners-css.ellipsis';
+import { Ellipsis } from 'react-css-spinners'
 import NumberFormat from 'react-number-format';
 import PropTypes from 'prop-types';
 import ufOptions from '../../assets/data/ufOptions.json';

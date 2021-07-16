@@ -4,11 +4,11 @@ import { connect } from "react-redux";
 import UploadFile from '../../components/UploadFile'
 import FileList from '../../components/FileList'
 import TextField from '@material-ui/core/TextField';
-import Ellipsis from '@bit/joshk.react-spinners-css.ellipsis';
 import { uniqueId } from 'lodash'
 import fileSize from 'filesize'
 import * as XLSX from 'xlsx'
 import ufOptions from '../../assets/data/ufOptions.json';
+import { Ellipsis } from 'react-css-spinners'
 
 import { createDer, getAllDers } from '../../redux/actions/DerActions'
 import { createSicro, getAllSicros } from '../../redux/actions/SicroActions'
@@ -156,7 +156,7 @@ const ImportPage = ({ dispatchCreateDer, dispatchCreateSicro, dispatchGetAllDers
                         !!database & !!optionsUF & uploadedFiles.length >= 1 ?
                             <button id="budget-create-button" disabled={loading ? true : false}  onClick={() => handleSubmmit(uploadedFiles[0])}>
                                 {
-                                    !loading ? 'Importar Dados' : <span><Ellipsis color="#FFF" size={42} /></span>
+                                    !loading ? 'Importar Dados' : <span> <Ellipsis color="#FFF" size={42} /></span>
                                 }
                             </button>
                             :

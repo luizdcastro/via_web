@@ -1,6 +1,7 @@
 import React from 'react'
 import * as FiIcons from 'react-icons/fi'
-import Default from '@bit/joshk.react-spinners-css.default';
+import { Ellipsis } from 'react-css-spinners'
+
 
 import { Container, FileInfo, Preview } from './styles'
 import ExcelIcon from '../../assets/icons/excel.png'
@@ -22,7 +23,7 @@ const FileList = ({ files }) => {
                     </FileInfo>
                     <div style={{display: 'flex'}}>
                         {!uploadedFile.uploaded && !uploadedFile.error && (
-                           <Default color="#516078" size={29} /> 
+                           <Ellipsis color="#516078" size={29} /> 
                         )}                      
                         {uploadedFile.uploaded && <FiIcons.FiCheckSquare size={21} color="#43A047" />}
                         {uploadedFile.error && (<FiIcons.FiAlertTriangle size={21} color="#E53935" />)}

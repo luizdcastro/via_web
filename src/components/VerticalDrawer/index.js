@@ -8,7 +8,7 @@ const VerticalDrawer = () => {
     const [activeMenu, setActiveMenu] = useState("orçamento")
 
     return (
-        <div className="vertical-container">
+        <div className="vertical-container"> 
             <ul className="vertical-menu-container">
                 <li>
                     <Link className={activeMenu === 'orçamento' ? 'menu-item-active' : 'vertical-menu-item'} to="/orçamento" onClick={() => setActiveMenu('orçamento')}>
@@ -44,13 +44,7 @@ const VerticalDrawer = () => {
                         <FiIcons.FiUploadCloud size={22} />
                         <p className="vertical-menu-title">Importar</p>
                     </Link>
-                </li>
-                <li>
-                    <Link className={activeMenu === 'registros' ? 'menu-item-active' : 'vertical-menu-item'}  to="/registros" onClick={() => setActiveMenu('registros')}>
-                        <FiIcons.FiList size={22} />
-                        <p className="vertical-menu-title">Registros</p>
-                    </Link>
-                </li>
+                </li>               
                 <div style={{ position: 'absolute', bottom: 15, width: '100%' }}>
                     <li>
                         <Link className={activeMenu === 'configurações' ? 'menu-item-active' : 'vertical-menu-item'}  to="/configurações" onClick={() => setActiveMenu('configurações')}>
@@ -58,8 +52,8 @@ const VerticalDrawer = () => {
                             <p className="vertical-menu-title">Configurações</p>
                         </Link>
                     </li>
+                    <p className="disclamer">Neovia DB | BETA</p>
                 </div>
-
             </ul>
         </div>
     )

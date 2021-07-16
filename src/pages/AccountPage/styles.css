@@ -38,7 +38,7 @@
     margin-top: 15px;
 }
 
-#account-create-button{
+#account-password-button{
     width: 325px;
     height: 40px;
     margin-top: 15px;
@@ -51,10 +51,26 @@
     cursor: pointer;
 }
 
-#account-create-button:hover{
+#account-password-button:hover{
     cursor: pointer;
     background-color: #546E7A;
     border: solid 1px #546E7A;
+}
+
+#account-password-button-disabled{
+    width: 325px;
+    height: 40px;
+    margin-top: 15px;
+    font-size: 13px;
+    font-weight: 500;
+    border: solid 1px #E0E0E0;
+    background-color: #E0E0E0;
+    color: #9E9E9E;
+}
+
+#account-password-button-disabled:hover{
+    cursor: default;
+    filter: none    
 }
 
 #account-create-button-light{

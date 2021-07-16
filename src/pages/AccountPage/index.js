@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import { connect } from "react-redux";
 import TextField from '@material-ui/core/TextField';
-import Ellipsis from '@bit/joshk.react-spinners-css.ellipsis';
+import { Ellipsis } from 'react-css-spinners'
 
 import { logoutUser, updatePassword } from "../../redux/actions/AuthActions";
 import { getMe } from '../../redux/actions/UserActions'
@@ -116,19 +116,21 @@ const AccountPage = ({ getme, disptachGetMe, dispatchUpdatePassword, dispatchLog
                         value={passwordConfirm}
                         onChange={(e) => SetPasswordConfirm(e.target.value)}
                     />
-                    <button id="account-create-button" disabled={loading ? true : false} onClick={() => handleUpdatePassword()}>
-                        {
-                            !loading ? 'Atualizar Senha' : <span><Ellipsis color="#FFF" size={42} /></span>
-                        }
-                    </button>
+                      {
+                        !!passwordConfirm & !!password & !!passwordCurrent ?
+                            <button id="account-password-button" disabled={loading ? true : false}  onClick={() => handleUpdatePassword()}>
+                                {
+                                    !loading ? 'Atualizar Senha' : <span> <Ellipsis color="#FFF" size={42} /></span>
+                                }
+                            </button>
+                            :
+                            <button id="account-password-button-disabled" disabled>Atualizar Senha</button>
+                    }                 
+                  
                     {sucessMessage && (<p className="password-sucess-message">Senha atualizada com sucesso</p>)}
                     {errorMessage && (<p className="password-error-message">{errorDetails}</p>)}
                     <div className="acccount-separator"></div>
-                    <button id="account-create-button-light" disabled={loading ? true : false} onClick={() => handleLogOut()}>
-                        {
-                            !loading ? 'Sair' : <span><Ellipsis color="#FFF" size={33} /></span>
-                        }
-                    </button>                   
+                    <button id="account-create-button-light" disabled={loading ? true : false} onClick={() => handleLogOut()}>Sair </button>                   
                 </div>
             </div>
         </div>
