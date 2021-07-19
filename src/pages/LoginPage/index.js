@@ -1,23 +1,26 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { Ellipsis } from 'react-css-spinners'
 
 import { loginUser } from '../../redux/actions/AuthActions';
 import FormInput from '../../components/FormInput';
-import CustomButton from '../../components/CustomButton';
 import './styles.css'
 
 const Login = ({ dispatchLoginAction }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [serverError, setServerError] = useState('');
+  const [loading, setLoading] = useState(false)
+
 
   const handleOnSubmmit = (event) => {
     event.preventDefault();
+    setLoading(true)
     dispatchLoginAction(
       email,
       password,
-      () => console.log('Logged In!'),
-      (response) => setServerError(response.error)
+      () => setLoading(false),
+      (response) => { setServerError(response.error); setLoading(false) }
     );
   };
 
@@ -48,10 +51,15 @@ const Login = ({ dispatchLoginAction }) => {
               handleChange={(e) => setPassword(e.target.value)}
             />
             {serverError ? <p className="login-error">{serverError}</p> : null}
-            <CustomButton id="login-button" name="Entrar" onClick={handleOnSubmmit} />
+            <button className="login-button" disabled={loading ? true : false} onClick={() => handleOnSubmmit}>
+              {
+                !loading ? 'Entrar' : <span> <Ellipsis color="#FFF" size={38} /></span>
+              }
+            </button>
           </form>
           <div className="login-separator">
           </div>
+          <p className="login-disclamer">Neovia DB | BETA</p>
         </div>
       </div>
     </div>

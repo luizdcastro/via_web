@@ -4,7 +4,7 @@ import * as FiIcons from 'react-icons/fi'
 import './styles.css'
 
 const VerticalDrawer = () => {
-    const [subnav, setSubnav] = useState(false)
+    const [subnav, setSubnav] = useState(true)
     const [activeMenu, setActiveMenu] = useState("orçamento")
 
     return (
@@ -28,11 +28,11 @@ const VerticalDrawer = () => {
                 <li>{subnav ?
                     <div>
                         <Link className={activeMenu === 'database-der' ? 'menu-item-active' : 'vertical-menu-item'}  to="/database-der" onClick={() => setActiveMenu('database-der')}>
-                            <FiIcons.FiCode size={20} />
+                            <FiIcons.FiChevronsRight size={19} style={{marginLeft: 15}}/>
                             <p className="vertical-menu-title">DER</p>
                         </Link>
                         <Link className={activeMenu === 'database-sicro' ? 'menu-item-active' : 'vertical-menu-item'} to="/database-sicro" onClick={() => setActiveMenu('database-sicro')}>
-                            <FiIcons.FiCode size={20} />
+                            <FiIcons.FiChevronsRight size={19} style={{marginLeft: 15}}/>
                             <p className="vertical-menu-title">Sicro</p>
                         </Link>
                     </div>
@@ -41,20 +41,21 @@ const VerticalDrawer = () => {
                 </li>
                 <li>
                     <Link className={activeMenu === 'importar' ? 'menu-item-active' : 'vertical-menu-item'}  to="/importar" onClick={() => setActiveMenu('importar')}>
-                        <FiIcons.FiUploadCloud size={22} />
+                        <FiIcons.FiUploadCloud size={20} />
                         <p className="vertical-menu-title">Importar</p>
                     </Link>
-                </li>               
-                <div style={{ position: 'absolute', bottom: 15, width: '100%' }}>
+                </li>              
+              
+            </ul>
+            <ul className="vertical-menu-footer" >
                     <li>
                         <Link className={activeMenu === 'configurações' ? 'menu-item-active' : 'vertical-menu-item'}  to="/configurações" onClick={() => setActiveMenu('configurações')}>
-                            <FiIcons.FiSettings size={22} />
+                            <FiIcons.FiSettings size={20} />
                             <p className="vertical-menu-title">Configurações</p>
                         </Link>
                     </li>
                     <p className="disclamer">Neovia DB | BETA</p>
-                </div>
-            </ul>
+                </ul>
         </div>
     )
 }

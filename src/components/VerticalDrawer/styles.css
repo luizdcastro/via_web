@@ -1,14 +1,14 @@
 .vertical-container {
     display: flex;
     justify-content: center;
-    position: absolute;
+    position: fixed;
     width: 220px;
-    height: 100vh;   
+    height: 100%;
     background-color: #f0f0f0;
 }
 
 .vertical-menu-container{ 
-    margin-top: 35px;
+    margin-top: 50px;
 }
 
 .vertical-menu-item{
@@ -16,7 +16,7 @@
     align-items: center;
     width: 200px;
     height: 40px;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
     padding-left: 20px;
     color: #516078;
 }
@@ -26,7 +26,7 @@
     align-items: center;
     width: 200px;
     height: 40px;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
     padding-left: 20px;
     color: #105efb;
     background-color:#e6e6e6;
@@ -49,8 +49,16 @@
     margin-left: 12px;
 }
 
+.vertical-menu-footer{
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
+    margin-left: 20px;
+}
+
+
 .disclamer{
-    font-size: 13px;
+    font-size: 12px;
     color: #516078;
     margin-left: 42px;  
     padding-top: 15px;

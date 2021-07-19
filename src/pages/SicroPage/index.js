@@ -12,7 +12,7 @@ const SicroPage = ({ dispatchUpdateSicro, dispatchGetAllSicros, sicro }) => {
     const [search, setSearch] = useState("")
     const [editRow, setEditRow] = useState([])
     const [arteris, setArteris] = useState([])
-    const [viaPaulista, setViaPaulista] = useState([])
+    const [CCR, setCCR] = useState([])
     const [optionsUF, setOptionsUF] = useState("")
     const [updateValues, setUpdateValues] = useState({})
 
@@ -25,7 +25,7 @@ const SicroPage = ({ dispatchUpdateSicro, dispatchGetAllSicros, sicro }) => {
     useEffect(() => {
         updatePayload();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [arteris, viaPaulista, setUpdateValues])
+    }, [arteris, CCR, setUpdateValues])
    
     useEffect(() => {
         if (sicro.length >= 1) {
@@ -54,27 +54,27 @@ const SicroPage = ({ dispatchUpdateSicro, dispatchGetAllSicros, sicro }) => {
     const updatePayload = () => {
         let payload
 
-        if (!!arteris.id && !!viaPaulista.id) {
+        if (!!arteris.id && !!CCR.id) {
             payload = {
                 id: arteris.id,
                 data: {
-                    arteris: arteris.arteris, via_paulista: viaPaulista.via_paulista
+                    arteris: arteris.arteris, CCR: CCR.CCR
                 }
             }
             setUpdateValues(payload)
         }
 
-        if (!!viaPaulista.id && !arteris.id) {
+        if (!!CCR.id && !arteris.id) {
             payload = {
-                id: viaPaulista.id,
+                id: CCR.id,
                 data: {
-                    via_paulista: viaPaulista.via_paulista
+                    CCR: CCR.CCR
                 }
             }
             setUpdateValues(payload)
         }
 
-        if (!!arteris.id && !viaPaulista.id) {
+        if (!!arteris.id && !CCR.id) {
             payload = {
                 id: arteris.id,
                 data: {
@@ -89,12 +89,12 @@ const SicroPage = ({ dispatchUpdateSicro, dispatchGetAllSicros, sicro }) => {
     const handleUpdate = () => {
         dispatchUpdateSicro(
             arteris.arteris,
-            viaPaulista.via_paulista,
+            CCR.CCR,
             editRow,
             () => {
                 updateRef(updateValues?.id, updateValues?.data);
                 setArteris([])
-                setViaPaulista([])
+                setCCR([])
                 dispatchGetAllSicros()
             },
             (error) => console.log(error)
@@ -173,15 +173,15 @@ const SicroPage = ({ dispatchUpdateSicro, dispatchGetAllSicros, sicro }) => {
                 }
                 {
                     !editRow.includes(item.id) ?
-                        <p className="sicro_row_ref">{item?.via_paulista}</p>
+                        <p className="sicro_row_ref">{item?.CCR}</p>
 
                         :
                         <div className="sicro_row_input-container" >
                             <input
                                 className="sicro_row_input"
                                 type="text"
-                                defaultValue={item?.via_paulista}
-                                onChange={(e) => setViaPaulista({ id: item.id, via_paulista: e.target.value })}
+                                defaultValue={item?.CCR}
+                                onChange={(e) => setCCR({ id: item.id, CCR: e.target.value })}
                             />
                         </div>
                 }
@@ -224,11 +224,11 @@ const SicroPage = ({ dispatchUpdateSicro, dispatchGetAllSicros, sicro }) => {
                         <p className="sicro_col_price">Preço</p>
                         <p className="sicro_col_state">UF</p>
                         <p className="sicro_col_ref">Arteris</p>
-                        <p className="sicro_col_ref">Via Paulista</p>
+                        <p className="sicro_col_ref">CCR</p>
                         <p className="sicro_col_actions">Editar</p>
                     </div>
                     {data.length >= 1 && (
-                        <div style={{ height: '60vh', flex: 1 }}>
+                        <div style={{ height: '60vh', flex: 1}}>
                             <List
                                 width={1200}
                                 height={450}
@@ -245,8 +245,8 @@ const SicroPage = ({ dispatchUpdateSicro, dispatchGetAllSicros, sicro }) => {
 
 const mapDispatchToProps = (dispatch) => ({
     dispatchGetAllSicros: () => dispatch(getAllSicros()),
-    dispatchUpdateSicro: (arteris, via_paulista, sicroId, onSuccess, onError) =>
-        dispatch(updateSicro({ arteris, via_paulista }, sicroId, onSuccess, onError))
+    dispatchUpdateSicro: (arteris, CCR, sicroId, onSuccess, onError) =>
+        dispatch(updateSicro({ arteris, CCR }, sicroId, onSuccess, onError))
 });
 
 const mapStateToProps = (state) => ({

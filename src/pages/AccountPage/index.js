@@ -65,26 +65,12 @@ const AccountPage = ({ getme, disptachGetMe, dispatchUpdatePassword, dispatchLog
                 <h2 className="account-title">Configurações</h2>
                 <p className="account-data-label">Informações do usuário</p>
                 <div className="account-input-data">
-                    <TextField
-                        label="Nome"
-                        size="small"
-                        disabled
-                        variant="outlined"
-                        style={{ width: 325, marginTop: 15 }}
-                        InputLabelProps={{ style: { fontSize: 13, } }}
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                    <TextField
-                        label="Email"
-                        size="small"
-                        disabled
-                        variant="outlined"
-                        style={{ width: 325, marginTop: 15 }}
-                        InputLabelProps={{ style: { fontSize: 13, } }}
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
+                    <div className="acccount-data-name">
+                        <p className="account-data-content">{name}</p>
+                    </div>
+                    <div className="acccount-data-name">
+                        <p className="account-data-content">{email}</p>
+                    </div>
                     <p className="account-password-label">Alterar senha</p>
                     <TextField
                         label="Senha Atual"
@@ -116,21 +102,21 @@ const AccountPage = ({ getme, disptachGetMe, dispatchUpdatePassword, dispatchLog
                         value={passwordConfirm}
                         onChange={(e) => SetPasswordConfirm(e.target.value)}
                     />
-                      {
+                    {
                         !!passwordConfirm & !!password & !!passwordCurrent ?
-                            <button id="account-password-button" disabled={loading ? true : false}  onClick={() => handleUpdatePassword()}>
+                            <button id="account-password-button" disabled={loading ? true : false} onClick={() => handleUpdatePassword()}>
                                 {
                                     !loading ? 'Atualizar Senha' : <span> <Ellipsis color="#FFF" size={42} /></span>
                                 }
                             </button>
                             :
                             <button id="account-password-button-disabled" disabled>Atualizar Senha</button>
-                    }                 
-                  
+                    }
+
                     {sucessMessage && (<p className="password-sucess-message">Senha atualizada com sucesso</p>)}
                     {errorMessage && (<p className="password-error-message">{errorDetails}</p>)}
                     <div className="acccount-separator"></div>
-                    <button id="account-create-button-light" disabled={loading ? true : false} onClick={() => handleLogOut()}>Sair </button>                   
+                    <button id="account-create-button-light" disabled={loading ? true : false} onClick={() => handleLogOut()}>Sair </button>
                 </div>
             </div>
         </div>

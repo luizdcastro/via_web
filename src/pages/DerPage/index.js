@@ -12,7 +12,7 @@ const DerPage = ({ dispatchUpdateDer, dispatchGetAllDers, der }) => {
     const [search, setSearch] = useState("")
     const [editRow, setEditRow] = useState([])
     const [arteris, setArteris] = useState([])
-    const [viaPaulista, setViaPaulista] = useState([])
+    const [CCR, setCCR] = useState([])
     const [optionsUF, setOptionsUF] = useState("")
     const [updateValues, setUpdateValues] = useState({})
 
@@ -25,7 +25,7 @@ const DerPage = ({ dispatchUpdateDer, dispatchGetAllDers, der }) => {
     useEffect(() => {
         updatePayload();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [arteris, viaPaulista, setUpdateValues])
+    }, [arteris, CCR, setUpdateValues])
    
     useEffect(() => {
         if (der.length >= 1) {
@@ -54,27 +54,27 @@ const DerPage = ({ dispatchUpdateDer, dispatchGetAllDers, der }) => {
     const updatePayload = () => {
         let payload
 
-        if (!!arteris.id && !!viaPaulista.id) {
+        if (!!arteris.id && !!CCR.id) {
             payload = {
                 id: arteris.id,
                 data: {
-                    arteris: arteris.arteris, via_paulista: viaPaulista.via_paulista
+                    arteris: arteris.arteris, CCR: CCR.CCR
                 }
             }
             setUpdateValues(payload)
         }
 
-        if (!!viaPaulista.id && !arteris.id) {
+        if (!!CCR.id && !arteris.id) {
             payload = {
-                id: viaPaulista.id,
+                id: CCR.id,
                 data: {
-                    via_paulista: viaPaulista.via_paulista
+                    CCR: CCR.CCR
                 }
             }
             setUpdateValues(payload)
         }
 
-        if (!!arteris.id && !viaPaulista.id) {
+        if (!!arteris.id && !CCR.id) {
             payload = {
                 id: arteris.id,
                 data: {
@@ -89,12 +89,12 @@ const DerPage = ({ dispatchUpdateDer, dispatchGetAllDers, der }) => {
     const handleUpdate = () => {
         dispatchUpdateDer(
             arteris.arteris,
-            viaPaulista.via_paulista,
+            CCR.CCR,
             editRow,
             () => {
                 updateRef(updateValues?.id, updateValues?.data);
                 setArteris([])
-                setViaPaulista([])
+                setCCR([])
                 dispatchGetAllDers()
             },
             (error) => console.log(error)
@@ -173,15 +173,15 @@ const DerPage = ({ dispatchUpdateDer, dispatchGetAllDers, der }) => {
                 }
                 {
                     !editRow.includes(item.id) ?
-                        <p className="der_row_ref">{item?.via_paulista}</p>
+                        <p className="der_row_ref">{item?.CCR}</p>
 
                         :
                         <div className="der_row_input-container" >
                             <input
                                 className="der_row_input"
                                 type="text"
-                                defaultValue={item?.via_paulista}
-                                onChange={(e) => setViaPaulista({ id: item.id, via_paulista: e.target.value })}
+                                defaultValue={item?.CCR}
+                                onChange={(e) => setCCR({ id: item.id, CCR: e.target.value })}
                             />
                         </div>
                 }
@@ -224,7 +224,7 @@ const DerPage = ({ dispatchUpdateDer, dispatchGetAllDers, der }) => {
                         <p className="der_col_price">Preço</p>
                         <p className="der_col_state">UF</p>
                         <p className="der_col_ref">Arteris</p>
-                        <p className="der_col_ref">Via Paulista</p>
+                        <p className="der_col_ref">CCR</p>
                         <p className="der_col_actions">Editar</p>
                     </div>
                     {data.length >= 1 && (
@@ -245,8 +245,8 @@ const DerPage = ({ dispatchUpdateDer, dispatchGetAllDers, der }) => {
 
 const mapDispatchToProps = (dispatch) => ({
     dispatchGetAllDers: () => dispatch(getAllDers()),
-    dispatchUpdateDer: (arteris, via_paulista, derId, onSuccess, onError) =>
-        dispatch(updateDer({ arteris, via_paulista }, derId, onSuccess, onError))
+    dispatchUpdateDer: (arteris, CCR, derId, onSuccess, onError) =>
+        dispatch(updateDer({ arteris, CCR }, derId, onSuccess, onError))
 });
 
 const mapStateToProps = (state) => ({

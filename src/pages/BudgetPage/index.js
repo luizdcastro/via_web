@@ -206,7 +206,7 @@ const ImportPage = ({ dispatchCreateBudget }) => {
                     >
                         <option value="" defaultValue hidden></option>
                         <option className="option-select-item" value="arteris">Arteris</option>
-                        <option value="via_paulista">Via Paulista</option>
+                        <option value="CCR">CCR</option>
                     </TextField>
                     <TextField
                         label="BDI"
@@ -231,7 +231,7 @@ const ImportPage = ({ dispatchCreateBudget }) => {
                         {uploadedFiles.length > 0 ? <FileList files={uploadedFiles} /> : null}
                     </div>
                     {
-                        !!database & !!optionsUF & uploadedFiles.length >= 1 & !!company & !!values ?
+                        !!database & !!optionsUF & uploadedFiles[0]?.uploaded  & !!company & !!values ?
                             <button id="budget-create-button" disabled={loading ? true : false} onClick={() => handleSubmmit(uploadedFiles[0])}>
                                 {
                                     !loading ? 'Gerar Orçamento' : <span><Ellipsis color="#FFF" size={42} /></span>

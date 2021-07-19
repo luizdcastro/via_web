@@ -1,7 +1,6 @@
 .budget-page{
     display: flex;
     background-color: #fafafa;
-    height: 100vh;
     margin-left: 220px;
     padding-top: 30px;  
     padding-left: 30px;
@@ -100,12 +99,12 @@
     margin-top: 10px;
     font-size: 13px;
     color: #43A047;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 .budget-error-message{
     margin-top: 10px;
     font-size: 13px;
     color: #E53935;
-    font-weight: 500;
+    font-weight: 400;
 }

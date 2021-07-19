@@ -81,6 +81,7 @@ const ImportPage = ({ dispatchCreateDer, dispatchCreateSicro, dispatchGetAllDers
         }
 
         if (database === 'sicro') {
+            setLoading(true)
             dispatchCreateSicro(
                 { table: item.table, state: optionsUF },
                 (response) => {
@@ -153,7 +154,7 @@ const ImportPage = ({ dispatchCreateDer, dispatchCreateSicro, dispatchGetAllDers
                         {uploadedFiles.length > 0 ? <FileList files={uploadedFiles} /> : null}
                     </div>
                     {
-                        !!database & !!optionsUF & uploadedFiles.length >= 1 ?
+                        !!database & !!optionsUF & uploadedFiles[0]?.uploaded ?
                             <button id="budget-create-button" disabled={loading ? true : false}  onClick={() => handleSubmmit(uploadedFiles[0])}>
                                 {
                                     !loading ? 'Importar Dados' : <span> <Ellipsis color="#FFF" size={42} /></span>
