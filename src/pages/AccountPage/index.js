@@ -65,12 +65,8 @@ const AccountPage = ({ getme, disptachGetMe, dispatchUpdatePassword, dispatchLog
                 <h2 className="account-title">Configurações</h2>
                 <p className="account-data-label">Informações do usuário</p>
                 <div className="account-input-data">
-                    <div className="acccount-data-name">
-                        <p className="account-data-content">{name}</p>
-                    </div>
-                    <div className="acccount-data-name">
-                        <p className="account-data-content">{email}</p>
-                    </div>
+                    <input className="acccount-data-name" value={name} disabled/>
+                    <input className="acccount-data-name" value={email} disabled/>
                     <p className="account-password-label">Alterar senha</p>
                     <TextField
                         label="Senha Atual"
