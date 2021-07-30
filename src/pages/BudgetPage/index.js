@@ -207,6 +207,7 @@ const ImportPage = ({ dispatchCreateBudget }) => {
                         <option value="" defaultValue hidden></option>
                         <option className="option-select-item" value="arteris">Arteris</option>
                         <option value="CCR">CCR</option>
+                        <option value="geral">Geral</option>
                     </TextField>
                     <TextField
                         label="BDI"
